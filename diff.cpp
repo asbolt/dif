@@ -43,9 +43,9 @@ Node *diff (Node *node)
                             return _MUL(base, ind);
                           }
             case EXP_FUN: {
-                            Node *ind = copy (node->right);
-                            Node *base = _POW(_X, _NUM(node->right->value - 1));
-                            return _POW(base, ind);
+                            Node *base = copy (node);
+                            Node *ln = _LOG(_NUM(E), _NUM(node->left->value));
+                            return _MUL(base, ln);
                           }
             case EXP:     {
                             Node *exp = copy (node);
@@ -53,7 +53,7 @@ Node *diff (Node *node)
                             return _MUL(exp, ind);
                           }
             case LOG:     {
-                            Node *num = _DIV(_NUM(1), _MUL(copy(node->right), _LOG(_NUM(E), node->right)));
+                            Node *num = _DIV(_NUM(1), _MUL(copy (node->right), _LOG(_NUM(E), copy (node->left))));
                             return _MUL(num, diff(node->right));
                           }
 
@@ -65,47 +65,47 @@ Node *diff (Node *node)
     {
         switch (node->value)
         {
-            case SIN:    return _COS(diff (node->left));
-            case COS:    return _SUB(_NUM(0), _SIN(diff (node->left)));
+            case SIN:    return _MUL(_COS(copy (node->left)), diff (node->left));
+            case COS:    return _MUL(_SUB(_NUM(0), _SIN(copy (node->left))), diff (node->left));
             case TG:     {
-                           Node *denominator = _POW(_COS(copy(node->left)), _NUM(2));
+                           Node *denominator = _POW(_COS(copy (node->left)), _NUM(2));
                            Node *div = _DIV (_NUM(1), denominator);
-                           return _MUL(div, diff(node->left)); 
+                           return _MUL(div, diff (node->left)); 
                          }
             case CTG:    {
-                           Node *denominator = _POW(_SIN(copy(node->left)), _NUM(2));
+                           Node *denominator = _POW(_SIN(copy (node->left)), _NUM(2));
                            Node *div = _SUB(_NUM(0), (_DIV(_NUM(1), denominator)));
-                           return _MUL(div, diff(node->left));
+                           return _MUL(div, diff (node->left));
                          }
             case ARCSIN: {
-                           Node *base = _SUB(_NUM(1), (_POW(copy(node->left), _NUM(2))));
+                           Node *base = _SUB(_NUM(1), (_POW(copy (node->left), _NUM(2))));
                            Node *denominator = _POW(base, _NUM(1/2));
                            return _DIV(_NUM(1), denominator);
                          }
             case ARCCOS: {
-                           Node *base = _SUB(_NUM(1), (_POW(copy(node->left), _NUM(2))));
+                           Node *base = _SUB(_NUM(1), (_POW(copy (node->left), _NUM(2))));
                            Node *denominator = _POW(base, _NUM(1/2));
                            return _SUB(_NUM(0), _DIV(_NUM(1), denominator));
                          }
             case ARCTG:  {
-                           Node *base = _ADD(_NUM(1), (_POW(copy(node->left), _NUM(2))));
+                           Node *base = _ADD(_NUM(1), (_POW(copy (node->left), _NUM(2))));
                            return _DIV(_NUM(1), base);
                          }
             case ARCCTG: {
-                           Node *base = _ADD(_NUM(1), (_POW(copy(node->left), _NUM(2))));
+                           Node *base = _ADD(_NUM(1), (_POW(copy (node->left), _NUM(2))));
                            return _SUB(_NUM(0), _DIV(_NUM(1), base));
                          }
-            case SH:     return _CH(diff (node->left));
-            case CH:     return _SH(diff (node->left));
+            case SH:     return _MUL(_CH(copy (node->left)), diff (node->left));
+            case CH:     return _MUL(_SH(copy (node->left)), diff (node->left));
             case TH:     {
-                           Node *denominator = _POW(_CH(copy(node->left)), _NUM(2));
+                           Node *denominator = _POW(_CH(copy (node->left)), _NUM(2));
                            Node *div = _DIV (_NUM(1), denominator);
                            return _MUL(div, diff(node->left)); 
                          }
             case CTH:    {
-                           Node *denominator = _POW(_SH(copy(node->left)), _NUM(2));
+                           Node *denominator = _POW(_SH(copy (node->left)), _NUM(2));
                            Node *div = _SUB(_NUM(0), (_DIV(_NUM(1), denominator)));
-                           return _MUL(div, diff(node->left));
+                           return _MUL(div, diff (node->left));
                          }
 
             default: break;
@@ -127,3 +127,189 @@ Node *copy (Node *node)
 
     return nodeCopy; 
 }
+
+Node *nodeOptimization (Node *node)
+{
+    if (node->left != NULL)
+    {
+        node->left = nodeOptimization (node->left);
+    }
+
+    if (node->right != NULL)
+    {
+        node->right = nodeOptimization (node->right);
+    }
+
+    if (node->type != OPERATION)
+    {
+        return copy(node);
+    }
+
+    switch (node->value)
+    {
+    case ADD: { 
+                if (node->left->type == NUMBER && node->right->type == NUMBER)
+                {
+                    Node *sum = _NUM(node->left->value + node->right->value);
+                    FREE_OLD_BRANCHES;
+                    return sum;
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 0)
+                {
+                    Node *cr = copy(node->right);
+                    FREE_OLD_BRANCHES;
+                    return cr;
+                }
+
+                if (node->right->type == NUMBER && node->right->value == 0)
+                {
+                    Node *cl = copy(node->left);
+                    FREE_OLD_BRANCHES;
+                    return cl;
+                }
+
+                break;
+              }
+    case SUB: { 
+                if (node->left->type == NUMBER && node->right->type == NUMBER)
+                {
+                    Node *sum = _NUM(node->left->value + node->right->value);
+                    FREE_OLD_BRANCHES;
+                    return sum;
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 0)
+                {
+                    Node *cr = _MUL(_NUM(-1), copy(node->right));
+                    FREE_OLD_BRANCHES;
+                    return cr;
+                }
+
+                if (node->right->type == NUMBER && node->right->value == 0)
+                {
+                    Node *cl = copy(node->left);
+                    FREE_OLD_BRANCHES;
+                    return cl;
+                }
+
+                break;
+              }
+    case MUL: { 
+                if (node->left->type == NUMBER && node->right->type == NUMBER)
+                {
+                    Node *mul = _NUM(node->left->value * node->right->value);
+                    FREE_OLD_BRANCHES;
+                    return mul;
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 0)
+                {
+                    FREE_OLD_BRANCHES;
+                    return _NUM(0);
+                }
+
+                if (node->right->type == NUMBER && node->right->value == 0)
+                {
+                    FREE_OLD_BRANCHES;
+                    return _NUM(0);
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 1)
+                {
+                    Node *cr = copy(node->right);
+                    FREE_OLD_BRANCHES;
+                    return cr;
+                }
+
+                if (node->right->type == NUMBER && node->right->value == 1)
+                {
+                    Node *cl = copy(node->left);
+                    FREE_OLD_BRANCHES;
+                    return cl;
+                }
+              }
+    case DIV: { 
+                if (node->left->type == NUMBER && node->right->type == NUMBER)
+                {
+                    Node *div = _NUM(node->left->value / node->right->value);
+                    FREE_OLD_BRANCHES;
+                    return div;
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 0)
+                {
+                    FREE_OLD_BRANCHES;
+                    return _NUM(0);
+                }
+
+                break;
+              }
+    case POW: { 
+                if (node->left->type == NUMBER && node->right->type == NUMBER)
+                {
+                    Node *num = _NUM(pow(node->left->value,node->right->value));
+                    FREE_OLD_BRANCHES;
+                    return num;
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 0)
+                {
+                    FREE_OLD_BRANCHES;
+                    return _NUM(1);
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 1)
+                {
+                    Node *cr = copy(node->right);
+                    FREE_OLD_BRANCHES;
+                    return cr;
+                }
+
+                if (node->right->type == NUMBER && node->right->value < 0)
+                {
+                    Node *div = _DIV(_NUM(1), _POW(copy(node->left), _NUM(- node->right->value)));
+                    FREE_OLD_BRANCHES;
+                    return div;
+                }
+
+                break;
+              }
+    case EXP: { 
+                if (node->left->type == NUMBER && node->left->value == 0)
+                {
+                    FREE_OLD_BRANCHES;
+                    return _NUM(0);
+                }
+
+                if (node->left->type == NUMBER && node->left->value == 1)
+                {
+                    FREE_OLD_BRANCHES;
+                    return _NUM(E);
+                }
+
+                break;
+              }
+    case LOG: { 
+                if (node->left->type == NUMBER && node->left->value == 10)
+                {
+                    //return copy(node->right);
+                }
+
+                if (node->right->type == NUMBER && node->right->value == E)
+                {
+                    //return _DIV(_NUM(1), _POW(copy(node->left), _NUM(- node->right->value)));
+                } //TODO ln, lg
+
+                break;
+              }
+    
+    case EXP_FUN:
+    default:
+        return copy(node);
+    } 
+
+    return NULL;
+}
+
+// TODO проверка на деление на 0

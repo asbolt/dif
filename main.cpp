@@ -4,8 +4,9 @@
 
 int main ()
 {
-    Node *node = _EXP_FUN(_NUM(3), _X);
+    Node *node = _ADD(_X, _NUM(0));
     Node *diffNode = diff (node);
+    diffNode = nodeOptimization (diffNode);
 
     dump (NARROW, node, diffNode);
 

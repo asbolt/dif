@@ -13,7 +13,7 @@
 #define _DIV(left, right) nodeCtor (OPERATION, DIV, left, right)
 #define _POW(left, right) nodeCtor (OPERATION, POW, left, right)
 #define _EXP_FUN(left, right) nodeCtor (OPERATION, EXP_FUN, left, right)
-#define _EXP(right) nodeCtor (OPERATION, EXP, E, right)
+#define _EXP(right) nodeCtor (OPERATION, EXP, _NUM(E), right)
 #define _LOG(left, right) nodeCtor (OPERATION, LOG, left, right)
 
 #define _SIN(left) nodeCtor (TRIG_OPERATION, SIN, left, NULL)

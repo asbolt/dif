@@ -40,7 +40,7 @@ enum NODE_TRIG_OPERATIONS
     CH     = 10,
     TH     = 11,
     CTH    = 12
-};
+}; // TODO ln, lg
 
 enum NODE_VARIABLES
 {
@@ -57,12 +57,18 @@ enum NODE_STATUS
     NODE_GOOD                     = 0
 };
 
+enum OPTIMIZATION
+{
+    YES = 0,
+    NO = 1
+};
+
 struct Node 
 {
-    NODE_TYPE type     = EMPTY;
-    int value          = 0;
-    Node *left         = NULL;
-    Node *right        = NULL;
+    NODE_TYPE type    = EMPTY;
+    int value         = 0;
+    Node *left        = NULL;
+    Node *right       = NULL;
 };
 
 Node* nodeCtor (NODE_TYPE nodeType, int value, Node *left, Node *right);
