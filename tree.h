@@ -5,6 +5,22 @@
 #include <malloc.h>
 #include <assert.h>
 
+enum SIZE_OPERATIONS
+{
+    _sin = 3,
+    _cos = 3,
+    _tg = 2,
+    _ctg = 3,
+    _arcsin = 6,
+    _arccos = 6,
+    _arctg = 5,
+    _arcctg = 6,
+    _sh = 2,
+    _ch = 2,
+    _th = 2,
+    _cth = 3
+};
+
 enum NODE_TYPE
 {
     NUMBER         = 1,

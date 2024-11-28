@@ -111,7 +111,7 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
         }
     } else if (mode == WIDE)
     {
-        //fprintf (dotFile, "node%p [shape=record, label = \"{%p | parent: %p | {%d} | {%p | %p}}\", rang = %d]\n", node, node, node->parent, node->value, node->left, node->right, rang);
+        fprintf (dotFile, "node%p [shape=record, label = \"{%p | {%d} | {%p | %p}}\", rang = %d]\n", node, node, node->value, node->left, node->right, rang);
     }
 
     if (node->left != NULL)
@@ -147,6 +147,160 @@ bool treeDumpMakeArrows (Node *node, FILE *dotFile)
     if (node->right != NULL)
     {
         treeDumpMakeArrows (node->right, dotFile);
+    }
+
+    return true;
+}
+
+bool texPrint (Node* node, const char *fileName)
+{
+    FILE *file = fopen (fileName, "w");
+    if (file == NULL)
+    {
+        return false;
+    }
+
+    fprintf (file, "$$");
+    textPrintNodes (node, file);
+    fprintf (file, "$$");
+
+    return true;
+}
+
+bool textPrintNodes (Node *node, FILE *file)
+{
+    if (node->type == NUMBER)
+    {
+        fprintf (file, "%d", node->value);
+    }
+
+    if (node->type == VARIABLE)
+    {
+        fprintf (file, "x");
+    }
+
+    if (node->type == OPERATION)
+    {
+        switch (node->value)
+        {
+        case ADD: fprintf (file, "(");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "+");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, ")");
+                  break;
+        case SUB: fprintf (file, "(");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "-");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, ")");
+                  break;
+        case MUL: fprintf (file, "(");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "\\cdot ");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, ")");
+                  break;
+        case DIV: fprintf (file, "\\frac{");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "}{");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, "}");
+                  break;
+        case POW: fprintf (file, "{");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "}^{");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, "}");
+                  break;
+        case EXP_FUN: fprintf (file, "{");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "}^{");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, "}");
+                  break;
+        case EXP: fprintf (file, "e^{");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, "}");
+                  break;
+        case LOG: fprintf (file, "\\log_{");
+                  textPrintNodes (node->left, file);
+                  fprintf (file, "}{");
+                  textPrintNodes (node->right, file);
+                  fprintf (file, "}");
+                  break;
+        
+        default:
+            break;
+        }
+    }
+
+    if (node->type == TRIG_OPERATION)
+    {
+        switch (node->value)
+        {
+        case SIN:    fprintf (file, "sin (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+     
+        case COS:    fprintf (file, "cos (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+     
+        case TG:     fprintf (file, "tg (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+     
+        case CTG:    fprintf (file, "ctg (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+
+        case ARCSIN: fprintf (file, "arcsin (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+
+        case ARCCOS: fprintf (file, "arccos (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+
+        case ARCTG:  fprintf (file, "arctg (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+
+        case ARCCTG: fprintf (file, "arcctg (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+
+        case SH:     fprintf (file, "sh (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+     
+        case CH:     fprintf (file, "ch (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+     
+        case TH:     fprintf (file, "th (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+     
+        case CTH:    fprintf (file, "cth (");
+                     textPrintNodes (node->left, file);
+                     fprintf (file, ")");
+                     break;
+
+        default: break;
+        }
     }
 
     return true;

@@ -1,6 +1,15 @@
 #include "diff.h"
+#include "dump.h"
 
 Node *diff (Node *node)
+{
+    Node *diffNode = makeDiff (node);
+    diffNode = nodeOptimization (diffNode);
+
+    return diffNode;
+}
+
+Node *makeDiff (Node *node)
 {
     NodeCheckForErrors(node, __LINE__, __FUNCTION__, __FILE__);
 
@@ -117,13 +126,26 @@ Node *diff (Node *node)
 
 Node *copy (Node *node)
 {
-    //NodeCheckForErrors(node, __LINE__, __FUNCTION__, __FILE__);
+    NodeCheckForErrors(node, __LINE__, __FUNCTION__, __FILE__);
     if (node == NULL)
     {
         return NULL;
     }
 
-    Node *nodeCopy = nodeCtor (node->type, node->value, copy(node->left), copy(node->right));
+    Node *cl = NULL;
+    Node *cr = NULL;
+
+    if (node->left != NULL)
+    {
+        cl = copy (node->left);
+    }
+
+    if (node->right != NULL)
+    {
+        cr = copy (node->right);
+    }
+
+    Node *nodeCopy = nodeCtor (node->type, node->value, cl, cr);
 
     return nodeCopy; 
 }
@@ -276,13 +298,13 @@ Node *nodeOptimization (Node *node)
                 break;
               }
     case EXP: { 
-                if (node->left->type == NUMBER && node->left->value == 0)
+                if (node->right->type == NUMBER && node->right->value == 0)
                 {
                     FREE_OLD_BRANCHES;
                     return _NUM(0);
                 }
 
-                if (node->left->type == NUMBER && node->left->value == 1)
+                if (node->right->type == NUMBER && node->right->value == 1)
                 {
                     FREE_OLD_BRANCHES;
                     return _NUM(E);
@@ -309,7 +331,7 @@ Node *nodeOptimization (Node *node)
         return copy(node);
     } 
 
-    return NULL;
+    return copy(node);
 }
 
 // TODO проверка на деление на 0

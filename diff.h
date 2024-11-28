@@ -13,5 +13,6 @@
 Node *diff (Node *node);
 Node *copy (Node *node);
 Node *nodeOptimization (Node *node);
+Node *makeDiff (Node *node);
 
 #endif

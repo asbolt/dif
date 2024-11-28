@@ -13,6 +13,8 @@ enum MODE
 bool dump (int mode, Node *node, Node *diffNode);
 bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode);
 bool treeDumpMakeArrows (Node *node, FILE *dotFile);
+bool textPrintNodes (Node *node, FILE *file);
+bool texPrint (Node* node, const char *fileName);
 
 #endif
 
