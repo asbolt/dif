@@ -12,6 +12,8 @@ Node *GetN ();
 Node *GetE ();
 Node *GetT ();
 Node *GetKitkat ();
+Node *GetS ();
+Node *GetL ();
 Node *SyntaxError ();
 
 #endif

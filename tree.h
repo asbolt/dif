@@ -18,7 +18,10 @@ enum SIZE_OPERATIONS
     _sh = 2,
     _ch = 2,
     _th = 2,
-    _cth = 3
+    _cth = 3,
+    _log = 3
+    //_e = 1,
+
 };
 
 enum NODE_TYPE
