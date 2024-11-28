@@ -1,73 +1,81 @@
 digraph G{
 rankdir=HR;
-node0x562ae549a4c0 [shape="rectangle", label = "+", rang = 0]
-node0x562ae549a3a0 [shape="rectangle", label = "+", rang = 1]
-node0x562ae549a2a0 [shape="rectangle", label = "1", rang = 2]
-node0x562ae549a380 [shape="rectangle", label = "*", rang = 2]
-node0x562ae549a340 [shape="rectangle", label = "+", rang = 3]
-node0x562ae549a2c0 [shape="rectangle", label = "1", rang = 4]
-node0x562ae549a320 [shape="rectangle", label = "*", rang = 4]
-node0x562ae549a2e0 [shape="rectangle", label = "2", rang = 5]
-node0x562ae549a300 [shape="rectangle", label = "2", rang = 5]
-node0x562ae549a360 [shape="rectangle", label = "2", rang = 3]
-node0x562ae549a4a0 [shape="rectangle", label = "sin", rang = 1]
-node0x562ae549a480 [shape="rectangle", label = "+", rang = 2]
-node0x562ae549a3c0 [shape="rectangle", label = "8", rang = 3]
-node0x562ae549a460 [shape="rectangle", label = "^", rang = 3]
-node0x562ae549a3e0 [shape="rectangle", label = "2", rang = 4]
-node0x562ae549a440 [shape="rectangle", label = "+", rang = 4]
-node0x562ae549a400 [shape="rectangle", label = "2", rang = 5]
-node0x562ae549a420 [shape="rectangle", label = "9", rang = 5]
-node0x562ae549a4c0 [shape="rectangle", label = "+", rang = 0]
-node0x562ae549a3a0 [shape="rectangle", label = "+", rang = 1]
-node0x562ae549a2a0 [shape="rectangle", label = "1", rang = 2]
-node0x562ae549a380 [shape="rectangle", label = "*", rang = 2]
-node0x562ae549a340 [shape="rectangle", label = "+", rang = 3]
-node0x562ae549a2c0 [shape="rectangle", label = "1", rang = 4]
-node0x562ae549a320 [shape="rectangle", label = "*", rang = 4]
-node0x562ae549a2e0 [shape="rectangle", label = "2", rang = 5]
-node0x562ae549a300 [shape="rectangle", label = "2", rang = 5]
-node0x562ae549a360 [shape="rectangle", label = "2", rang = 3]
-node0x562ae549a4a0 [shape="rectangle", label = "sin", rang = 1]
-node0x562ae549a480 [shape="rectangle", label = "+", rang = 2]
-node0x562ae549a3c0 [shape="rectangle", label = "8", rang = 3]
-node0x562ae549a460 [shape="rectangle", label = "^", rang = 3]
-node0x562ae549a3e0 [shape="rectangle", label = "2", rang = 4]
-node0x562ae549a440 [shape="rectangle", label = "+", rang = 4]
-node0x562ae549a400 [shape="rectangle", label = "2", rang = 5]
-node0x562ae549a420 [shape="rectangle", label = "9", rang = 5]
-node0x562ae549a4c0 -> node0x562ae549a3a0
-node0x562ae549a4c0 -> node0x562ae549a4a0
-node0x562ae549a3a0 -> node0x562ae549a2a0
-node0x562ae549a3a0 -> node0x562ae549a380
-node0x562ae549a380 -> node0x562ae549a340
-node0x562ae549a380 -> node0x562ae549a360
-node0x562ae549a340 -> node0x562ae549a2c0
-node0x562ae549a340 -> node0x562ae549a320
-node0x562ae549a320 -> node0x562ae549a2e0
-node0x562ae549a320 -> node0x562ae549a300
-node0x562ae549a4a0 -> node0x562ae549a480
-node0x562ae549a480 -> node0x562ae549a3c0
-node0x562ae549a480 -> node0x562ae549a460
-node0x562ae549a460 -> node0x562ae549a3e0
-node0x562ae549a460 -> node0x562ae549a440
-node0x562ae549a440 -> node0x562ae549a400
-node0x562ae549a440 -> node0x562ae549a420
-node0x562ae549a4c0 -> node0x562ae549a3a0
-node0x562ae549a4c0 -> node0x562ae549a4a0
-node0x562ae549a3a0 -> node0x562ae549a2a0
-node0x562ae549a3a0 -> node0x562ae549a380
-node0x562ae549a380 -> node0x562ae549a340
-node0x562ae549a380 -> node0x562ae549a360
-node0x562ae549a340 -> node0x562ae549a2c0
-node0x562ae549a340 -> node0x562ae549a320
-node0x562ae549a320 -> node0x562ae549a2e0
-node0x562ae549a320 -> node0x562ae549a300
-node0x562ae549a4a0 -> node0x562ae549a480
-node0x562ae549a480 -> node0x562ae549a3c0
-node0x562ae549a480 -> node0x562ae549a460
-node0x562ae549a460 -> node0x562ae549a3e0
-node0x562ae549a460 -> node0x562ae549a440
-node0x562ae549a440 -> node0x562ae549a400
-node0x562ae549a440 -> node0x562ae549a420
+node0x558aeae09500 [shape="rectangle", label = "+", rang = 0]
+node0x558aeae093a0 [shape="rectangle", label = "+", rang = 1]
+node0x558aeae092a0 [shape="rectangle", label = "1", rang = 2]
+node0x558aeae09380 [shape="rectangle", label = "*", rang = 2]
+node0x558aeae09340 [shape="rectangle", label = "+", rang = 3]
+node0x558aeae092c0 [shape="rectangle", label = "1", rang = 4]
+node0x558aeae09320 [shape="rectangle", label = "*", rang = 4]
+node0x558aeae092e0 [shape="rectangle", label = "2", rang = 5]
+node0x558aeae09300 [shape="rectangle", label = "2", rang = 5]
+node0x558aeae09360 [shape="rectangle", label = "2", rang = 3]
+node0x558aeae094e0 [shape="rectangle", label = "sin", rang = 1]
+node0x558aeae094c0 [shape="rectangle", label = "+", rang = 2]
+node0x558aeae093c0 [shape="rectangle", label = "8", rang = 3]
+node0x558aeae094a0 [shape="rectangle", label = "^", rang = 3]
+node0x558aeae093e0 [shape="rectangle", label = "2", rang = 4]
+node0x558aeae09480 [shape="rectangle", label = "log", rang = 4]
+node0x558aeae09400 [shape="rectangle", label = "2", rang = 5]
+node0x558aeae09460 [shape="rectangle", label = "*", rang = 5]
+node0x558aeae09420 [shape="rectangle", label = "8", rang = 6]
+node0x558aeae09440 [shape="rectangle", label = "7", rang = 6]
+node0x558aeae09500 [shape="rectangle", label = "+", rang = 0]
+node0x558aeae093a0 [shape="rectangle", label = "+", rang = 1]
+node0x558aeae092a0 [shape="rectangle", label = "1", rang = 2]
+node0x558aeae09380 [shape="rectangle", label = "*", rang = 2]
+node0x558aeae09340 [shape="rectangle", label = "+", rang = 3]
+node0x558aeae092c0 [shape="rectangle", label = "1", rang = 4]
+node0x558aeae09320 [shape="rectangle", label = "*", rang = 4]
+node0x558aeae092e0 [shape="rectangle", label = "2", rang = 5]
+node0x558aeae09300 [shape="rectangle", label = "2", rang = 5]
+node0x558aeae09360 [shape="rectangle", label = "2", rang = 3]
+node0x558aeae094e0 [shape="rectangle", label = "sin", rang = 1]
+node0x558aeae094c0 [shape="rectangle", label = "+", rang = 2]
+node0x558aeae093c0 [shape="rectangle", label = "8", rang = 3]
+node0x558aeae094a0 [shape="rectangle", label = "^", rang = 3]
+node0x558aeae093e0 [shape="rectangle", label = "2", rang = 4]
+node0x558aeae09480 [shape="rectangle", label = "log", rang = 4]
+node0x558aeae09400 [shape="rectangle", label = "2", rang = 5]
+node0x558aeae09460 [shape="rectangle", label = "*", rang = 5]
+node0x558aeae09420 [shape="rectangle", label = "8", rang = 6]
+node0x558aeae09440 [shape="rectangle", label = "7", rang = 6]
+node0x558aeae09500 -> node0x558aeae093a0
+node0x558aeae09500 -> node0x558aeae094e0
+node0x558aeae093a0 -> node0x558aeae092a0
+node0x558aeae093a0 -> node0x558aeae09380
+node0x558aeae09380 -> node0x558aeae09340
+node0x558aeae09380 -> node0x558aeae09360
+node0x558aeae09340 -> node0x558aeae092c0
+node0x558aeae09340 -> node0x558aeae09320
+node0x558aeae09320 -> node0x558aeae092e0
+node0x558aeae09320 -> node0x558aeae09300
+node0x558aeae094e0 -> node0x558aeae094c0
+node0x558aeae094c0 -> node0x558aeae093c0
+node0x558aeae094c0 -> node0x558aeae094a0
+node0x558aeae094a0 -> node0x558aeae093e0
+node0x558aeae094a0 -> node0x558aeae09480
+node0x558aeae09480 -> node0x558aeae09400
+node0x558aeae09480 -> node0x558aeae09460
+node0x558aeae09460 -> node0x558aeae09420
+node0x558aeae09460 -> node0x558aeae09440
+node0x558aeae09500 -> node0x558aeae093a0
+node0x558aeae09500 -> node0x558aeae094e0
+node0x558aeae093a0 -> node0x558aeae092a0
+node0x558aeae093a0 -> node0x558aeae09380
+node0x558aeae09380 -> node0x558aeae09340
+node0x558aeae09380 -> node0x558aeae09360
+node0x558aeae09340 -> node0x558aeae092c0
+node0x558aeae09340 -> node0x558aeae09320
+node0x558aeae09320 -> node0x558aeae092e0
+node0x558aeae09320 -> node0x558aeae09300
+node0x558aeae094e0 -> node0x558aeae094c0
+node0x558aeae094c0 -> node0x558aeae093c0
+node0x558aeae094c0 -> node0x558aeae094a0
+node0x558aeae094a0 -> node0x558aeae093e0
+node0x558aeae094a0 -> node0x558aeae09480
+node0x558aeae09480 -> node0x558aeae09400
+node0x558aeae09480 -> node0x558aeae09460
+node0x558aeae09460 -> node0x558aeae09420
+node0x558aeae09460 -> node0x558aeae09440
 }

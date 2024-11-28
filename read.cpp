@@ -1,6 +1,7 @@
 #include "read.h"
 
-const char *s = "1+(1+2*2)*2+sin(8+2^(2+9))$";
+const char *s = "1+(1+2*2)*2+sin(8+2^(log2(8*7)))$";
+//const char *s = "log2(8*9)$";
 int p = 0;
 
 int main ()
@@ -51,6 +52,7 @@ Node *GetN ()
     if (pOld == p)
         SyntaxError ();
 
+    //printf ("%d\n", val);
     return _NUM(val);
 }
 
@@ -98,7 +100,8 @@ Node *GetKitkat ()
         strncmp (s + p, "sh", _sh) == 0 ||
         strncmp (s + p, "ch", _ch) == 0 ||
         strncmp (s + p, "th", _th) == 0 ||
-        strncmp (s + p, "cth", _cth) == 0 )
+        strncmp (s + p, "cth", _cth) == 0 ||
+        strncmp (s + p, "log", _log) == 0)
         {
 
             if (strncmp (s + p, "sin", _sin) == 0)
@@ -150,6 +153,28 @@ Node *GetKitkat ()
                 p += _cth;
                 Node *val = GetS();
                 return _CTH (val);
+            } else if (strncmp (s + p, "log", _log) == 0)
+            {
+                p += _log;
+                Node *val = GetN ();
+                //printf ("oo\n");
+                if (s[p] == '(')
+                {
+                    //printf ("oo\n");
+                    p++;
+                    Node *val2 = GetE ();
+                    //printf ("%d\n", val2->value);
+                    if (s[p] == ')')
+                    {
+                        p++;
+                        //printf ("pp %d\n", p);
+                        return _LOG(val,val2);
+                    }
+                    SyntaxError ();
+                } else
+                {
+                    SyntaxError ();
+                }
             }
             
             return NULL;
@@ -189,12 +214,14 @@ Node *GetL ()
     {
         p += _log;
         Node *val = GetN ();
+        printf ("oo\n");
         if (s[p] == '(')
-        {
+        {printf ("oo\n");
             Node *val2 = GetPenis ();
             if (s[p] == ')')
             {
                 p++;
+                printf ("oo\n");
                 return _LOG(val,val2);
             }
             SyntaxError ();
@@ -212,7 +239,7 @@ Node *GetL ()
 
 Node *SyntaxError ()
 {
-    printf ("%c\n", s[p]);
+    printf ("%c %d\n", s[p], p);
     printf ("%c\n", s[p+1]);
     printf ("Syntax error\n");
 
