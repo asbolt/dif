@@ -4,15 +4,6 @@ const char *s = "1+(1+2*2)*2+sin(8+2^(log2(8*7)))$";
 //const char *s = "log2(8*9)$";
 int p = 0;
 
-int main ()
-{
-    Node *node = GetG();
-
-    dump (NARROW, node, node);
-
-    return 0;
-}
-
 Node *GetG ()
 {
     Node* val = GetE ();
@@ -239,9 +230,6 @@ Node *GetL ()
 
 Node *SyntaxError ()
 {
-    printf ("%c %d\n", s[p], p);
-    printf ("%c\n", s[p+1]);
     printf ("Syntax error\n");
-
-    return 0;
-} // TODO
+    exit (1);
+}

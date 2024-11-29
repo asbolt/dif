@@ -6,14 +6,14 @@
 #include "dump.h"
 #include <string.h>
 
-Node *GetPenis ();
-Node *GetG ();
-Node *GetN ();
-Node *GetE ();
-Node *GetT ();
-Node *GetKitkat ();
-Node *GetS ();
-Node *GetL ();
-Node *SyntaxError ();
+Node *GetPenis (FILE *file);
+Node *GetG (FILE *file);
+Node *GetN (FILE *file);
+Node *GetE (FILE *file);
+Node *GetT (FILE *file);
+Node *GetKitkat (FILE *file);
+Node *GetS (FILE *file);
+Node *GetL (FILE *file);
+Node *SyntaxError (FILE *file);
 
 #endif

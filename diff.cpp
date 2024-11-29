@@ -3,6 +3,8 @@
 
 Node *diff (Node *node)
 {
+    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+
     Node *diffNode = makeDiff (node);
     diffNode = nodeOptimization (diffNode);
 
@@ -127,10 +129,6 @@ Node *makeDiff (Node *node)
 Node *copy (Node *node)
 {
     NodeCheckForErrors(node, __LINE__, __FUNCTION__, __FILE__);
-    if (node == NULL)
-    {
-        return NULL;
-    }
 
     Node *cl = NULL;
     Node *cr = NULL;
@@ -152,6 +150,8 @@ Node *copy (Node *node)
 
 Node *nodeOptimization (Node *node)
 {
+    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+    
     if (node->left != NULL)
     {
         node->left = nodeOptimization (node->left);

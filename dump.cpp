@@ -2,7 +2,7 @@
 
 bool dump (int mode, Node *node, Node *diffNode)
 {
-    //NodeCheckForErrors (node);
+    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
 
     FILE * dotFile = fopen ("dot.dot", "wb");
         if (dotFile == NULL)
@@ -31,8 +31,8 @@ bool dump (int mode, Node *node, Node *diffNode)
 
 bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
 {
-    //checkForErrors (node);
     assert (dotFile);
+    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
     
     if (mode == NARROW)
     {
@@ -129,6 +129,9 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
 
 bool treeDumpMakeArrows (Node *node, FILE *dotFile)
 {
+    assert (dotFile);
+    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+
     if (node->left != NULL)
     {
         fprintf (dotFile, "node%p -> node%p\n", node, node->left);
@@ -154,6 +157,9 @@ bool treeDumpMakeArrows (Node *node, FILE *dotFile)
 
 bool texPrint (Node* node, const char *fileName)
 {
+    assert (fileName);
+    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+
     FILE *file = fopen (fileName, "w");
     if (file == NULL)
     {
@@ -169,6 +175,8 @@ bool texPrint (Node* node, const char *fileName)
 
 bool textPrintNodes (Node *node, FILE *file)
 {
+    assert (file);
+
     if (node->type == NUMBER)
     {
         fprintf (file, "%d", node->value);
@@ -195,11 +203,11 @@ bool textPrintNodes (Node *node, FILE *file)
                   textPrintNodes (node->right, file);
                   fprintf (file, ")");
                   break;
-        case MUL: fprintf (file, "(");
+        case MUL: //fprintf (file, "(");
                   textPrintNodes (node->left, file);
                   fprintf (file, "\\cdot ");
                   textPrintNodes (node->right, file);
-                  fprintf (file, ")");
+                  //fprintf (file, ")");
                   break;
         case DIV: fprintf (file, "\\frac{");
                   textPrintNodes (node->left, file);

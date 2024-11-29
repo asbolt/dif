@@ -55,7 +55,6 @@ NODE_STATUS NodeCheckForErrors (Node *node, int line, const char* function, cons
     }
 
     return NODE_GOOD;
-
 }
 
 bool nodePrintError (NODE_STATUS nodeError, int line, const char* function, const char* file)
