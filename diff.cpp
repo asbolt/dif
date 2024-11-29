@@ -151,7 +151,7 @@ Node *copy (Node *node)
 Node *nodeOptimization (Node *node)
 {
     NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
-    
+
     if (node->left != NULL)
     {
         node->left = nodeOptimization (node->left);
@@ -275,17 +275,17 @@ Node *nodeOptimization (Node *node)
                     return num;
                 }
 
-                if (node->left->type == NUMBER && node->left->value == 0)
+                if (node->right->type == NUMBER && node->right->value == 0)
                 {
                     FREE_OLD_BRANCHES;
                     return _NUM(1);
                 }
 
-                if (node->left->type == NUMBER && node->left->value == 1)
+                if (node->right->type == NUMBER && node->right->value == 1)
                 {
-                    Node *cr = copy(node->right);
+                    Node *cl = copy(node->left);
                     FREE_OLD_BRANCHES;
-                    return cr;
+                    return cl;
                 }
 
                 if (node->right->type == NUMBER && node->right->value < 0)
@@ -312,20 +312,8 @@ Node *nodeOptimization (Node *node)
 
                 break;
               }
-    case LOG: { 
-                if (node->left->type == NUMBER && node->left->value == 10)
-                {
-                    //return copy(node->right);
-                }
 
-                if (node->right->type == NUMBER && node->right->value == E)
-                {
-                    //return _DIV(_NUM(1), _POW(copy(node->left), _NUM(- node->right->value)));
-                } //TODO ln, lg
-
-                break;
-              }
-    
+    case LOG:
     case EXP_FUN:
     default:
         return copy(node);
@@ -333,5 +321,3 @@ Node *nodeOptimization (Node *node)
 
     return copy(node);
 }
-
-// TODO проверка на деление на 0

@@ -59,7 +59,7 @@ enum NODE_TRIG_OPERATIONS
     CH     = 10,
     TH     = 11,
     CTH    = 12
-}; // TODO ln, lg
+};
 
 enum NODE_VARIABLES
 {

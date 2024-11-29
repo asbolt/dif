@@ -14,5 +14,6 @@ Node *getMul (char *buffer, int *p);
 Node *getTrig (char *buffer, int *p);
 Node *getPow (char *buffer, int *p);
 Node *SyntaxError (char *buffer, int *p);
+Node *getVar (char *buffer, int *p);
 
 #endif

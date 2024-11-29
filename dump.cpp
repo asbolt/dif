@@ -203,11 +203,9 @@ bool textPrintNodes (Node *node, FILE *file)
                   textPrintNodes (node->right, file);
                   fprintf (file, ")");
                   break;
-        case MUL: //fprintf (file, "(");
-                  textPrintNodes (node->left, file);
+        case MUL: textPrintNodes (node->left, file);
                   fprintf (file, "\\cdot ");
                   textPrintNodes (node->right, file);
-                  //fprintf (file, ")");
                   break;
         case DIV: fprintf (file, "\\frac{");
                   textPrintNodes (node->left, file);
@@ -231,7 +229,23 @@ bool textPrintNodes (Node *node, FILE *file)
                   textPrintNodes (node->right, file);
                   fprintf (file, "}");
                   break;
-        case LOG: fprintf (file, "\\log_{");
+        case LOG: if (node->left->type == NUMBER && node->left->value == E)
+                  {
+                    fprintf (file, "\\ln{");
+                    textPrintNodes (node->right, file);
+                    fprintf (file, "}");
+                    break;
+                  }
+
+                  if (node->left->type == NUMBER && node->left->value == 10)
+                  {
+                    fprintf (file, "\\lg{");
+                    textPrintNodes (node->right, file);
+                    fprintf (file, "}");
+                    break;
+                  }
+                  
+                  fprintf (file, "\\log_{");
                   textPrintNodes (node->left, file);
                   fprintf (file, "}{");
                   textPrintNodes (node->right, file);

@@ -44,7 +44,7 @@ Node *getBranches (char *buffer, int *p)
         return val;
     }
     else
-        return getNumbers (buffer, p);
+        return getVar (buffer, p);
 }
 
 Node *getNumbers (char *buffer, int *p)
@@ -209,6 +209,16 @@ Node *getPow (char *buffer, int *p)
     }
 
     return _POW(val, val2);
+}
+
+Node *getVar (char *buffer, int *p)
+{
+    if (buffer[*p] == 'x')
+    {
+        (*p)++;
+        return _X;
+    }
+    else return getNumbers (buffer, p);
 }
 
 Node *SyntaxError (char *buffer, int *p)
