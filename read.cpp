@@ -198,8 +198,9 @@ Node *getPow (char *buffer, int *p)
         return val;
     }
 
-    if (val->type == NUMBER && val->value == E) //TODO тут явно надо исправить
+    if (val->type == CONST && val->value == E) //TODO тут явно надо исправить
     {
+        printf ("oi\n");
         return _EXP(val2);
     }
 
@@ -217,6 +218,14 @@ Node *getVar (char *buffer, int *p)
     {
         (*p)++;
         return _X;
+    } else if (buffer[*p] == 'e')
+    {
+        (*p)++;
+        return _E;
+    } else if (strncmp (buffer + *p, "pi", _pi) == 0)
+    {
+        (*p) += _pi;
+        return _PI;
     }
     else return getNumbers (buffer, p);
 }

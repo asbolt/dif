@@ -1,7 +1,7 @@
 #ifndef DSL_H_
 #define DSL_H_
 
-#define E 2.73
+//#define E 2.73
 
 #define _NUM(arg) nodeCtor (NUMBER, arg, NULL, NULL)
 
@@ -28,5 +28,8 @@
 #define _CH(left) nodeCtor (TRIG_OPERATION, CH, left, NULL)
 #define _TH(left) nodeCtor (TRIG_OPERATION, TH, left, NULL)
 #define _CTH(left) nodeCtor (TRIG_OPERATION, CTH, left, NULL)
+
+#define _E nodeCtor (CONST, E, NULL, NULL)
+#define _PI nodeCtor (CONST, PI, NULL, NULL)
 
 #endif

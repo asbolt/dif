@@ -41,6 +41,14 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
             fprintf (dotFile, "node%p [shape=\"rectangle\", label = \"%d\", rang = %d]\n", node, node->value, rang);
         }
 
+        if (node->type == CONST)
+        {
+            if (node->value == E)
+                fprintf (dotFile, "node%p [shape=\"rectangle\", label = \"e\", rang = %d]\n", node, rang);
+            else
+                fprintf (dotFile, "node%p [shape=\"rectangle\", label = \"pi\", rang = %d]\n", node, rang);
+        }
+
         if (node->type == VARIABLE)
         {
             switch (node->value)
@@ -187,6 +195,19 @@ bool textPrintNodes (Node *node, FILE *file)
         fprintf (file, "x");
     }
 
+    if (node->type == CONST)
+    {
+        if (node->value == E)
+        {
+            fprintf (file, "e");
+        }
+
+        if (node->value == PI)
+        {
+            fprintf (file, "pi");
+        }
+    }
+
     if (node->type == OPERATION)
     {
         switch (node->value)
@@ -244,7 +265,7 @@ bool textPrintNodes (Node *node, FILE *file)
                     fprintf (file, "}");
                     break;
                   }
-                  
+
                   fprintf (file, "\\log_{");
                   textPrintNodes (node->left, file);
                   fprintf (file, "}{");

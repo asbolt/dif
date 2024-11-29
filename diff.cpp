@@ -25,6 +25,11 @@ Node *makeDiff (Node *node)
         return _NUM(1);
     }
 
+    if (node->type == CONST)
+    {
+        return _NUM(1);
+    }
+
     if (node->type == OPERATION)
     {
         switch (node->value)
@@ -252,12 +257,12 @@ Node *nodeOptimization (Node *node)
                 }
               }
     case DIV: { 
-                if (node->left->type == NUMBER && node->right->type == NUMBER)
+                /*if (node->left->type == NUMBER && node->right->type == NUMBER)
                 {
                     Node *div = _NUM(node->left->value / node->right->value);
                     FREE_OLD_BRANCHES;
                     return div;
-                }
+                }*/
 
                 if (node->left->type == NUMBER && node->left->value == 0)
                 {

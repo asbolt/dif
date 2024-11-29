@@ -29,6 +29,7 @@ NODE_STATUS NodeCheckForErrors (Node *node, int line, const char* function, cons
     case NUMBER:
     case VARIABLE:
     case OPERATION:
+    case CONST:
     case TRIG_OPERATION: break;
     
     default:        nodePrintError (NODE_BAD_TYPE, line, function, file);
@@ -48,7 +49,7 @@ NODE_STATUS NodeCheckForErrors (Node *node, int line, const char* function, cons
         return NODE_BAD_TRIG_FUNC;
     }
 
-    if ((node->type == NUMBER || node->type == VARIABLE) && (node->left != NULL || node->right != NULL))
+    if ((node->type == NUMBER || node->type == VARIABLE || node->type == CONST) && (node->left != NULL || node->right != NULL))
     {
         nodePrintError (NODE_NOT_EMPTY_VALUE_BRANCHES, line, function, file);
         return NODE_NOT_EMPTY_VALUE_BRANCHES;

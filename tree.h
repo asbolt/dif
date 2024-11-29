@@ -19,9 +19,9 @@ enum SIZE_OPERATIONS
     _ch = 2,
     _th = 2,
     _cth = 3,
-    _log = 3
-    //_e = 1,
-
+    _log = 3,
+    _pi = 2,
+    _e = 1
 };
 
 enum NODE_TYPE
@@ -30,6 +30,7 @@ enum NODE_TYPE
     VARIABLE       = 2,
     OPERATION      = 3,
     TRIG_OPERATION = 4,
+    CONST          = 5,
     EMPTY          = 0
 };
 
@@ -64,6 +65,12 @@ enum NODE_TRIG_OPERATIONS
 enum NODE_VARIABLES
 {
     X = 0
+};
+
+enum CONSTS
+{
+    E = 0,
+    PI = 1
 };
 
 enum NODE_STATUS
