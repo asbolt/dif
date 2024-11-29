@@ -5,7 +5,7 @@
 
 int main ()
 {
-    Node *node = GetG ();
+    Node *node = readFunc ("func.txt");
     //Node *node = _EXP(_ADD(_X, _SIN(_X)));
     Node *diffNode = diff (node);
     dump (NARROW, node, diffNode);

@@ -6,14 +6,13 @@
 #include "dump.h"
 #include <string.h>
 
-Node *GetPenis (FILE *file);
-Node *GetG (FILE *file);
-Node *GetN (FILE *file);
-Node *GetE (FILE *file);
-Node *GetT (FILE *file);
-Node *GetKitkat (FILE *file);
-Node *GetS (FILE *file);
-Node *GetL (FILE *file);
-Node *SyntaxError (FILE *file);
+Node *readFunc (const char *fileName);
+Node *getBranches (char *buffer, int *p);
+Node *getNumbers (char *buffer, int *p);
+Node *getSum (char *buffer, int *p);
+Node *getMul (char *buffer, int *p);
+Node *getTrig (char *buffer, int *p);
+Node *getPow (char *buffer, int *p);
+Node *SyntaxError (char *buffer, int *p);
 
 #endif

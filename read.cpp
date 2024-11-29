@@ -1,60 +1,76 @@
 #include "read.h"
 
-const char *s = "1+(1+2*2)*2+sin(8+2^(log2(8*7)))$";
-//const char *s = "log2(8*9)$";
-int p = 0;
-
-Node *GetG ()
+Node *readFunc (const char *fileName)
 {
-    Node* val = GetE ();
-    if (s[p] != '$')
-        SyntaxError ();
+    FILE *file = fopen (fileName, "r");
+    if (file == NULL)
+    {
+        return NULL;
+    }
+
+    fseek (file, 0, SEEK_END);
+    int size = ftell (file);
+    fseek (file, 0, SEEK_SET);
+
+    char *buffer = (char *)calloc (size, sizeof(char));
+    if (buffer == NULL)
+    {
+        return NULL;
+    }
+    fread (buffer, sizeof(char), size, file);
+
+    int p = 0;
+
+    Node* val = getSum (buffer, &p);
+    if (buffer[p] != '$')
+        SyntaxError (buffer, &p);
+
+    free (buffer);
     return val;
 }
 
 
-Node *GetPenis ()
+Node *getBranches (char *buffer, int *p)
 {
-    if (s[p] == '(')
+    if (buffer[*p] == '(')
     {
-        p++;
-        Node *val = GetE ();
-        if (s[p] != ')')
+        (*p)++;
+        Node *val = getSum (buffer, p);
+        if (buffer[*p] != ')')
         {
-            SyntaxError ();
+            SyntaxError (buffer, p);
         }
-        p++;
+        (*p)++;
         return val;
     }
     else
-        return GetN ();
+        return getNumbers (buffer, p);
 }
 
-Node *GetN ()
+Node *getNumbers (char *buffer, int *p)
 {
     int val = 0;
-    int pOld = p;
-    while ('0' <= s[p] && s[p] <= '9')
+    int pOld = *p;
+    while ('0' <= buffer[*p] && buffer[*p] <= '9')
     {
-        val = val*10 + s[p] - '0';
-        p++;
+        val = val*10 + buffer[*p] - '0';
+        (*p)++;
     }
 
-    if (pOld == p)
-        SyntaxError ();
+    if (pOld == *p)
+        SyntaxError (buffer, p);
 
-    //printf ("%d\n", val);
     return _NUM(val);
 }
 
-Node *GetE ()
+Node *getSum (char *buffer, int *p)
 {
-    Node *val = GetT ();
-    while (s[p] == '+' || s[p] == '-')
+    Node *val = getMul (buffer, p);
+    while (buffer[*p] == '+' || buffer[*p] == '-')
     {
-        int op = s[p];
-        p++;
-        Node *val2 = GetT ();
+        int op = buffer[*p];
+        (*p)++;
+        Node *val2 = getMul (buffer, p);
         if (op == '+')
             val = _ADD(val, val2);
         else val = _SUB(val, val2);
@@ -62,15 +78,15 @@ Node *GetE ()
     return val;
 }
 
-Node *GetT ()
+Node *getMul (char *buffer, int *p)
 {
-    Node *val = GetKitkat ();
+    Node *val = getTrig (buffer, p);
 
-    while (s[p] == '*' || s[p] == '/')
+    while (buffer[*p] == '*' || buffer[*p] == '/')
     {
-        int op = s[p];
-        p++;
-        Node *val2 = GetKitkat ();
+        int op = buffer[*p];
+        (*p)++;
+        Node *val2 = getTrig (buffer, p);
         if (op == '*')
             val = _MUL(val, val2);
         else val = _DIV(val, val2);
@@ -78,110 +94,106 @@ Node *GetT ()
     return val;
 }
 
-Node *GetKitkat ()
+Node *getTrig (char *buffer, int *p)
 {
-    if (strncmp (s + p, "sin", _sin) == 0 ||
-        strncmp (s + p, "cos", _cos) == 0 ||
-        strncmp (s + p, "tg", _tg) == 0 ||
-        strncmp (s + p, "ctg", _ctg) == 0 ||
-        strncmp (s + p, "arcsin", _arcsin) == 0 ||
-        strncmp (s + p, "arccos", _arccos) == 0 ||
-        strncmp (s + p, "arctg", _arctg) == 0 ||
-        strncmp (s + p, "arcctg", _arcctg) == 0 ||
-        strncmp (s + p, "sh", _sh) == 0 ||
-        strncmp (s + p, "ch", _ch) == 0 ||
-        strncmp (s + p, "th", _th) == 0 ||
-        strncmp (s + p, "cth", _cth) == 0 ||
-        strncmp (s + p, "log", _log) == 0)
+    if (strncmp (buffer + *p, "sin", _sin) == 0 ||
+        strncmp (buffer + *p, "cos", _cos) == 0 ||
+        strncmp (buffer + *p, "tg", _tg) == 0 ||
+        strncmp (buffer + *p, "ctg", _ctg) == 0 ||
+        strncmp (buffer + *p, "arcsin", _arcsin) == 0 ||
+        strncmp (buffer + *p, "arccos", _arccos) == 0 ||
+        strncmp (buffer + *p, "arctg", _arctg) == 0 ||
+        strncmp (buffer + *p, "arcctg", _arcctg) == 0 ||
+        strncmp (buffer + *p, "sh", _sh) == 0 ||
+        strncmp (buffer + *p, "ch", _ch) == 0 ||
+        strncmp (buffer + *p, "th", _th) == 0 ||
+        strncmp (buffer + *p, "cth", _cth) == 0 ||
+        strncmp (buffer + *p, "log", _log) == 0)
         {
 
-            if (strncmp (s + p, "sin", _sin) == 0)
+            if (strncmp (buffer + *p, "sin", _sin) == 0)
             {
-                p += _sin;
-                Node *val = GetS();
+                *p += _sin;
+                Node *val = getPow(buffer, p);
                 return _SIN (val);
-            } else if (strncmp (s + p, "cos", _cos) == 0) {
-                p += _cos;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "cos", _cos) == 0) {
+                *p += _cos;
+                Node *val = getPow(buffer, p);
                 return _COS (val);
-            } else if (strncmp (s + p, "tg", _tg) == 0) {
-                p += _tg;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "tg", _tg) == 0) {
+                *p += _tg;
+                Node *val = getPow(buffer, p);
                 return _TG (val);
-            } else if (strncmp (s + p, "ctg", _ctg) == 0) {
-                p += _ctg;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "ctg", _ctg) == 0) {
+                *p += _ctg;
+                Node *val = getPow(buffer, p);
                 return _CTG (val);
-            } else if (strncmp (s + p, "arcsin", _arcsin) == 0) {
-                p += _arcsin;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "arcsin", _arcsin) == 0) {
+                *p += _arcsin;
+                Node *val = getPow(buffer, p);
                 return _ARCSIN (val);
-            } else if (strncmp (s + p, "arccos", _arccos) == 0) {
-                p += _arccos;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "arccos", _arccos) == 0) {
+                *p += _arccos;
+                Node *val = getPow(buffer, p);
                 return _ARCCOS (val);
-            } else if (strncmp (s + p, "arctg", _arctg) == 0) {
-                p += _arctg;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "arctg", _arctg) == 0) {
+                *p += _arctg;
+                Node *val = getPow(buffer, p);
                 return _ARCTG (val);
-            } else if (strncmp (s + p, "arcctg", _arcctg) == 0) {
-                p += _arctg;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "arcctg", _arcctg) == 0) {
+                *p += _arctg;
+                Node *val = getPow(buffer, p);
                 return _ARCCTG (val);
-            } else if (strncmp (s + p, "sh", _sh) == 0) {
-                p += _sh;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "sh", _sh) == 0) {
+                *p += _sh;
+                Node *val = getPow(buffer, p);
                 return _SH (val);
-            } else if (strncmp (s + p, "ch", _ch) == 0) {
-                p += _ch;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "ch", _ch) == 0) {
+                *p += _ch;
+                Node *val = getPow(buffer, p);
                 return _CH (val);
-            } else if (strncmp (s + p, "th", _th) == 0) {
-                p += _th;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "th", _th) == 0) {
+                *p += _th;
+                Node *val = getPow(buffer, p);
                 return _TH (val);
-            } else if (strncmp (s + p, "cth", _cth) == 0) {
-                p += _cth;
-                Node *val = GetS();
+            } else if (strncmp (buffer + *p, "cth", _cth) == 0) {
+                *p += _cth;
+                Node *val = getPow(buffer, p);
                 return _CTH (val);
-            } else if (strncmp (s + p, "log", _log) == 0)
+            } else if (strncmp (buffer + *p, "log", _log) == 0)
             {
-                p += _log;
-                Node *val = GetN ();
-                //printf ("oo\n");
-                if (s[p] == '(')
+                *p += _log;
+                Node *val = getNumbers (buffer, p);
+                if (buffer[*p] == '(')
                 {
-                    //printf ("oo\n");
-                    p++;
-                    Node *val2 = GetE ();
-                    //printf ("%d\n", val2->value);
-                    if (s[p] == ')')
+                    (*p)++;
+                    Node *val2 = getSum (buffer, p);
+                    if (buffer[*p] == ')')
                     {
-                        p++;
-                        //printf ("pp %d\n", p);
+                        (*p)++;
                         return _LOG(val,val2);
                     }
-                    SyntaxError ();
+                    SyntaxError (buffer, p);
                 } else
                 {
-                    SyntaxError ();
+                    SyntaxError (buffer, p);
                 }
             }
             
             return NULL;
         }
-    else return GetS ();
+    else return getPow (buffer, p);
 }
 
-Node *GetS ()
+Node *getPow (char *buffer, int *p)
 {
-    Node *val = GetPenis ();
+    Node *val = getBranches (buffer, p);
     Node *val2 = NULL;
 
-    if (s[p] == '^' )
+    if (buffer[*p] == '^' )
     {
-        p++;
-        val2 = GetPenis ();
+        (*p)++;
+        val2 = getBranches (buffer, p);
     } else {
         return val;
     }
@@ -199,37 +211,9 @@ Node *GetS ()
     return _POW(val, val2);
 }
 
-Node *GetL ()
+Node *SyntaxError (char *buffer, int *p)
 {
-    if (strncmp (s + p, "log", _log) == 0)
-    {
-        p += _log;
-        Node *val = GetN ();
-        printf ("oo\n");
-        if (s[p] == '(')
-        {printf ("oo\n");
-            Node *val2 = GetPenis ();
-            if (s[p] == ')')
-            {
-                p++;
-                printf ("oo\n");
-                return _LOG(val,val2);
-            }
-            SyntaxError ();
-            return NULL;
-        } else
-        {
-            SyntaxError ();
-            return NULL;
-        }
-    } else {
-        Node *val = GetS();
-        return val;
-    }
-} //TODO синтаксис не очень, надо скобки добавить
-
-Node *SyntaxError ()
-{
+    printf ("%c\n%d\n", buffer[*p], *p);
     printf ("Syntax error\n");
     exit (1);
 }
