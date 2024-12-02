@@ -2,7 +2,7 @@
 
 bool dump (int mode, Node *node, Node *diffNode)
 {
-    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+    NodeCheckForErrors (node, VALUES_FOR_ERROR);
 
     FILE * dotFile = fopen ("dot.dot", "wb");
         if (dotFile == NULL)
@@ -32,7 +32,7 @@ bool dump (int mode, Node *node, Node *diffNode)
 bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
 {
     assert (dotFile);
-    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+    NodeCheckForErrors (node, VALUES_FOR_ERROR);
     
     if (mode == NARROW)
     {
@@ -200,8 +200,6 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
                 default: break;
             }
         }
-
-        //fprintf (dotFile, "node%p [shape=record, label = \"{%p | {%d} | |{%p | %p}|{%p | %p}}\", rang = %d]\n", node, node, node->value, node->left, node->right, rang);
     }
 
     if (node->left != NULL)
@@ -220,7 +218,7 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
 bool treeDumpMakeArrows (Node *node, FILE *dotFile)
 {
     assert (dotFile);
-    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+    NodeCheckForErrors (node, VALUES_FOR_ERROR);
 
     if (node->left != NULL)
     {
@@ -248,7 +246,7 @@ bool treeDumpMakeArrows (Node *node, FILE *dotFile)
 bool texPrint (Node* node, const char *fileName)
 {
     assert (fileName);
-    NodeCheckForErrors (node, __LINE__, __FUNCTION__, __FILE__);
+    NodeCheckForErrors (node, VALUES_FOR_ERROR);
 
     FILE *file = fopen (fileName, "w");
     if (file == NULL)

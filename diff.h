@@ -11,10 +11,10 @@
                           free (node->right);\
                           node->right = NULL\
 
-Node *diff (Node *root, FILE *file);
-Node *copy (Node *node);
+Node *differentiateAndOptimize(Node *root, FILE *file);
+Node *copySubtree (Node *node);
 Node *nodeOptimization (Node *node);
-Node *makeDiff (Node *node, Node *root, FILE *file);
+Node *differentiate (Node *node, Node *root, FILE *file);
 bool makeTexFile (const char *fileName, Node *node);
 bool printFunc (FILE *file, Node *node, Node *diffNode);
 

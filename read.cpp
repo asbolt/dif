@@ -60,7 +60,7 @@ Node *getNumbers (char *buffer, int *p)
     if (pOld == *p)
         SyntaxError (buffer, p);
 
-    return _NUM(val);
+    return NUM_(val);
 }
 
 Node *getSum (char *buffer, int *p)
@@ -72,8 +72,8 @@ Node *getSum (char *buffer, int *p)
         (*p)++;
         Node *val2 = getMul (buffer, p);
         if (op == '+')
-            val = _ADD(val, val2);
-        else val = _SUB(val, val2);
+            val = ADD_(val, val2);
+        else val = SUB_(val, val2);
     }
     return val;
 }
@@ -88,8 +88,8 @@ Node *getMul (char *buffer, int *p)
         (*p)++;
         Node *val2 = getTrig (buffer, p);
         if (op == '*')
-            val = _MUL(val, val2);
-        else val = _DIV(val, val2);
+            val = MUL_(val, val2);
+        else val = DIV_(val, val2);
     }
     return val;
 }
@@ -115,51 +115,51 @@ Node *getTrig (char *buffer, int *p)
             {
                 *p += _sin;
                 Node *val = getPow(buffer, p);
-                return _SIN (val);
+                return SIN_ (val);
             } else if (strncmp (buffer + *p, "cos", _cos) == 0) {
                 *p += _cos;
                 Node *val = getPow(buffer, p);
-                return _COS (val);
+                return COS_ (val);
             } else if (strncmp (buffer + *p, "tg", _tg) == 0) {
                 *p += _tg;
                 Node *val = getPow(buffer, p);
-                return _TG (val);
+                return TG_ (val);
             } else if (strncmp (buffer + *p, "ctg", _ctg) == 0) {
                 *p += _ctg;
                 Node *val = getPow(buffer, p);
-                return _CTG (val);
+                return CTG_ (val);
             } else if (strncmp (buffer + *p, "arcsin", _arcsin) == 0) {
                 *p += _arcsin;
                 Node *val = getPow(buffer, p);
-                return _ARCSIN (val);
+                return ARCSIN_ (val);
             } else if (strncmp (buffer + *p, "arccos", _arccos) == 0) {
                 *p += _arccos;
                 Node *val = getPow(buffer, p);
-                return _ARCCOS (val);
+                return ARCCOS_ (val);
             } else if (strncmp (buffer + *p, "arctg", _arctg) == 0) {
                 *p += _arctg;
                 Node *val = getPow(buffer, p);
-                return _ARCTG (val);
+                return ARCTG_ (val);
             } else if (strncmp (buffer + *p, "arcctg", _arcctg) == 0) {
                 *p += _arctg;
                 Node *val = getPow(buffer, p);
-                return _ARCCTG (val);
+                return ARCCTG_ (val);
             } else if (strncmp (buffer + *p, "sh", _sh) == 0) {
                 *p += _sh;
                 Node *val = getPow(buffer, p);
-                return _SH (val);
+                return SH_ (val);
             } else if (strncmp (buffer + *p, "ch", _ch) == 0) {
                 *p += _ch;
                 Node *val = getPow(buffer, p);
-                return _CH (val);
+                return CH_ (val);
             } else if (strncmp (buffer + *p, "th", _th) == 0) {
                 *p += _th;
                 Node *val = getPow(buffer, p);
-                return _TH (val);
+                return TH_ (val);
             } else if (strncmp (buffer + *p, "cth", _cth) == 0) {
                 *p += _cth;
                 Node *val = getPow(buffer, p);
-                return _CTH (val);
+                return CTH_ (val);
             } else if (strncmp (buffer + *p, "log", _log) == 0)
             {
                 *p += _log;
@@ -171,7 +171,7 @@ Node *getTrig (char *buffer, int *p)
                     if (buffer[*p] == ')')
                     {
                         (*p)++;
-                        return _LOG(val,val2);
+                        return LOG_(val,val2);
                     }
                     SyntaxError (buffer, p);
                 } else
@@ -198,18 +198,17 @@ Node *getPow (char *buffer, int *p)
         return val;
     }
 
-    if (val->type == CONST && val->value == E) //TODO тут явно надо исправить
+    if (val->type == CONST && val->value == E)
     {
-        //printf ("oi\n");
-        return _EXP(val2);
+        return EXP_(val2);
     }
 
     if (val->type == NUMBER)
     {
-        return _EXP_FUN(val, val2);
+        return EXP_FUN_(val, val2);
     }
 
-    return _POW(val, val2);
+    return POW_(val, val2);
 }
 
 Node *getVar (char *buffer, int *p)
@@ -217,15 +216,15 @@ Node *getVar (char *buffer, int *p)
     if (buffer[*p] == 'x')
     {
         (*p)++;
-        return _X;
+        return X_;
     } else if (buffer[*p] == 'e')
     {
         (*p)++;
-        return _E;
+        return E_;
     } else if (strncmp (buffer + *p, "pi", _pi) == 0)
     {
         (*p) += _pi;
-        return _PI;
+        return PI_;
     }
     else return getNumbers (buffer, p);
 }

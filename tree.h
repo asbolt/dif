@@ -5,6 +5,8 @@
 #include <malloc.h>
 #include <assert.h>
 
+#define VALUES_FOR_ERROR __LINE__, __FUNCTION__, __FILE__
+
 enum SIZE_OPERATIONS
 {
     _sin = 3,
