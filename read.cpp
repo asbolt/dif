@@ -200,7 +200,7 @@ Node *getPow (char *buffer, int *p)
 
     if (val->type == CONST && val->value == E) //TODO тут явно надо исправить
     {
-        printf ("oi\n");
+        //printf ("oi\n");
         return _EXP(val2);
     }
 

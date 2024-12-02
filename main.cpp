@@ -6,20 +6,9 @@
 int main ()
 {
     Node *node = readFunc ("func.txt");
-    //Node *node = _POW(_X, _NUM(1));
-    Node *diffNode = diff (node);
-    dump (NARROW, node, diffNode);
-
-    //Node *optNode = nodeOptimization (diffNode);
-    node = nodeOptimization (node);
-    //diffNode = nodeOptimization (diffNode);
-
-    dump (NARROW, node, diffNode);
-
-    texPrint (diffNode, "tex.tex");
-
+    makeTexFile ("tex.tex", node);
     nodeDtor (node);
-    nodeDtor (diffNode);
+    //nodeDtor (diffNode); // TODO
 
     return 0;
 }
