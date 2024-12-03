@@ -17,8 +17,11 @@ Node *differentiateAndOptimize(Node *root, FILE *file)
 {
     NodeCheckForErrors (root, VALUES_FOR_ERROR);
 
-    Node *diffNode = differentiate (root, root, file); // TODO домножить на производную икс там, где забыла
-    diffNode = nodeOptimization (diffNode); // TODO научить его дроби отнимать
+    Node *diffNode = differentiate (root, root, file);
+    while (nodeOptimization (diffNode) != diffNode)
+    {
+        diffNode = nodeOptimization (diffNode);
+    }
 
     dump (WIDE, root, diffNode); // TODO разбить ответ на буквы
 
@@ -74,14 +77,19 @@ Node *differentiate (Node *node, Node *root, FILE *file)
                           }
             case POW:     {
                             Node *ind = COPY(right);
-                            Node *base = POW_(X_, NUM_(node->right->value - 1));
-                            diffNode = MUL_(base, ind);
+                            Node *base = POW_(COPY(left), NUM_(node->right->value - 1));
+                            if (node->left->type != CONST && node->left->type != NUMBER)
+                            {
+                                diffNode = MUL_(base, ind);
+                            } else {
+                                diffNode = MUL_(MUL_(base, ind), DIFF(left));
+                            }
                             break;
                           }
             case EXP_FUN: {
                             Node *base = copySubtree (node);
-                            Node *ln = LOG_(NUM_(E), NUM_(node->left->value));
-                            diffNode = MUL_(base, ln);
+                            Node *ln = LOG_(E_, NUM_(node->left->value));
+                            diffNode = MUL_(MUL_(base, ln), DIFF(right));
                             break;
                           }
             case EXP:     {
@@ -126,24 +134,24 @@ Node *differentiate (Node *node, Node *root, FILE *file)
                          }
             case ARCSIN: {
                            Node *base = SUB_(NUM_(1), (POW_(COPY(left), NUM_(2))));
-                           Node *denominator = POW_(base, NUM_(1/2));
-                           diffNode = DIV_(NUM_(1), denominator);
+                           Node *denominator = POW_(base, DIV_(NUM_(1), NUM_(2)));
+                           diffNode = MUL_(DIV_(NUM_(1), denominator), DIFF(left));
                            break;
                          }
             case ARCCOS: {
                            Node *base = SUB_(NUM_(1), (POW_(COPY(left), NUM_(2))));
-                           Node *denominator = POW_(base, NUM_(1/2));
-                           diffNode = SUB_(NUM_(0), DIV_(NUM_(1), denominator));
+                           Node *denominator = POW_(base, DIV_(NUM_(1), NUM_(2)));
+                           diffNode = MUL_(SUB_(NUM_(0), DIV_(NUM_(1), denominator)), DIFF(left));
                            break;
                          }
             case ARCTG:  {
                            Node *base = ADD_(NUM_(1), (POW_(COPY(left), NUM_(2))));
-                           diffNode = DIV_(NUM_(1), base);
+                           diffNode = MUL_(DIV_(NUM_(1), base), DIFF(left));
                            break;
                          }
             case ARCCTG: {
                            Node *base = ADD_(NUM_(1), (POW_(COPY(left), NUM_(2))));
-                           diffNode = SUB_(NUM_(0), DIV_(NUM_(1), base));
+                           diffNode = MUL_(SUB_(NUM_(0), DIV_(NUM_(1), base)), DIFF(left));
                            break;
                          }
             case SH:     diffNode = MUL_(CH_(COPY(left)), DIFF(left));
@@ -195,157 +203,6 @@ Node *copySubtree (Node *node)
     Node *nodeCopy = nodeCtor (node->type, node->value, cl, cr);
 
     return nodeCopy; 
-}
-
-// TODO split into functions and move into separate file
-Node *nodeOptimization (Node *node)
-{
-    NodeCheckForErrors (node, VALUES_FOR_ERROR);
-
-    if (node->left != NULL)
-    {
-        node->left = nodeOptimization (node->left);
-    }
-
-    if (node->right != NULL)
-    {
-        node->right = nodeOptimization (node->right);
-    }
-
-    if (node->type != OPERATION)
-    {
-        return copySubtree(node);
-    }
-
-    switch (node->value)
-    {
-
-    case ADD:
-    case SUB: { 
-                if (node->left->type == NUMBER && node->right->type == NUMBER)
-                {
-                    Node *sum = NUM_(node->left->value + node->right->value);
-                    FREE_OLD_BRANCHES;
-                    return sum;
-                }
-
-                if (node->right->type == NUMBER && node->right->value == 0)
-                {
-                    Node *cl = copySubtree(node->left);
-                    FREE_OLD_BRANCHES;
-                    return cl;
-                }
-
-                if (node->value == ADD)
-                {
-                    if (node->left->type == NUMBER && node->left->value == 0)
-                    {
-                        Node *cr = copySubtree(node->right);
-                        FREE_OLD_BRANCHES;
-                        return cr;
-                    }
-                } else {
-                    if (node->left->type == NUMBER && node->left->value == 0)
-                    {
-                        Node *cr = MUL_(NUM_(-1), copySubtree(node->right));
-                        FREE_OLD_BRANCHES;
-                        return cr;
-                    }
-                }
-                break;
-              }
-    case MUL: { 
-                if (node->left->type == NUMBER && node->right->type == NUMBER)
-                {
-                    Node *mul = NUM_(node->left->value * node->right->value);
-                    FREE_OLD_BRANCHES;
-                    return mul;
-                }
-
-                if (node->left->type == NUMBER && node->left->value == 0 || node->right->value == 0)
-                {
-                    FREE_OLD_BRANCHES;
-                    return NUM_(0);
-                }
-
-                if (node->left->type == NUMBER && node->left->value == 1)
-                {
-                    Node *cr = copySubtree(node->right);
-                    FREE_OLD_BRANCHES;
-                    return cr;
-                }
-
-                if (node->right->type == NUMBER && node->right->value == 1)
-                {
-                    Node *cl = copySubtree(node->left);
-                    FREE_OLD_BRANCHES;
-                    return cl;
-                }
-
-                break;
-              }
-    case DIV: { 
-                if (node->left->type == NUMBER && node->left->value == 0)
-                {
-                    FREE_OLD_BRANCHES;
-                    return NUM_(0);
-                }
-
-                break;
-              }
-    case POW: { 
-                if (node->left->type == NUMBER && node->right->type == NUMBER)
-                {
-                    Node *num = NUM_(pow(node->left->value,node->right->value));
-                    FREE_OLD_BRANCHES;
-                    return num;
-                }
-
-                if (node->right->type == NUMBER && node->right->value == 0)
-                {
-                    FREE_OLD_BRANCHES;
-                    return NUM_(1);
-                }
-
-                if (node->right->type == NUMBER && node->right->value == 1)
-                {
-                    Node *cl = copySubtree(node->left);
-                    FREE_OLD_BRANCHES;
-                    return cl;
-                }
-
-                if (node->right->type == NUMBER && node->right->value < 0)
-                {
-                    Node *div = DIV_(NUM_(1), POW_(copySubtree(node->left), NUM_(- node->right->value)));
-                    FREE_OLD_BRANCHES;
-                    return div;
-                }
-
-                break;
-              }
-    case EXP: { 
-                if (node->right->type == NUMBER && node->right->value == 0)
-                {
-                    FREE_OLD_BRANCHES;
-                    return NUM_(0);
-                }
-
-                if (node->right->type == NUMBER && node->right->value == 1)
-                {
-                    FREE_OLD_BRANCHES;
-                    return E_;
-                }
-
-                break;
-              }
-
-    case LOG:
-    case EXP_FUN:
-    default:
-        return copySubtree(node);
-    } 
-
-    return copySubtree(node);
 }
 
 bool printFunc (FILE *file, Node *node, Node *diffNode)
