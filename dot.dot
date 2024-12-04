@@ -1,217 +1,159 @@
 digraph G{
 rankdir=HR;
-node0x5595adb1d790 [shape=record, label = " {0x5595adb1d790 | 3 | 4 |  :|{0x5595adb1d6f0 | 0x5595adb1d770}}", rang = 0]
-node0x5595adb1d6f0 [shape=record, label = " {0x5595adb1d6f0 | 3 | 1 |  +|{0x5595adb1d5d0 | 0x5595adb1d6d0}}", rang = 1]
-node0x5595adb1d5d0 [shape=record, label = " {0x5595adb1d5d0 | 3 | 3 |  *|{0x5595adb1d4f0 | 0x5595adb1d5b0}}", rang = 2]
-node0x5595adb1d4f0 [shape=record, label = " {0x5595adb1d4f0 | 4 | 1 | sin|{0x5595adb1d4d0 | (nil)}}", rang = 3]
-node0x5595adb1d4d0 [shape=record, label = " {0x5595adb1d4d0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
-node0x5595adb1d5b0 [shape=record, label = " {0x5595adb1d5b0 | 3 | 7 |  ^|{0x5595adb1d590 | 0x5595adb1d570}}", rang = 3]
-node0x5595adb1d590 [shape=record, label = " {0x5595adb1d590 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 4]
-node0x5595adb1d570 [shape=record, label = " {0x5595adb1d570 | 3 | 5 |  ^|{0x5595adb1d530 | 0x5595adb1d550}}", rang = 4]
-node0x5595adb1d530 [shape=record, label = " {0x5595adb1d530 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 5]
-node0x5595adb1d550 [shape=record, label = " {0x5595adb1d550 | 1 | 2 |  2|{0x5 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1d6d0 [shape=record, label = " {0x5595adb1d6d0 | 3 | 3 |  *|{0x5595adb1d5f0 | 0x5595adb1d6b0}}", rang = 2]
-node0x5595adb1d5f0 [shape=record, label = " {0x5595adb1d5f0 | 1 | 4 |  4|{0x3 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1d6b0 [shape=record, label = " {0x5595adb1d6b0 | 4 | 7 | arctg|{0x5595adb1d690 | (nil)}}", rang = 3]
-node0x5595adb1d690 [shape=record, label = " {0x5595adb1d690 | 3 | 1 |  +|{0x5595adb1d610 | 0x5595adb1d670}}", rang = 4]
-node0x5595adb1d610 [shape=record, label = " {0x5595adb1d610 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 5]
-node0x5595adb1d670 [shape=record, label = " {0x5595adb1d670 | 3 | 4 |  :|{0x5595adb1d630 | 0x5595adb1d650}}", rang = 5]
-node0x5595adb1d630 [shape=record, label = " {0x5595adb1d630 | 1 | 2 |  2|{0x6 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1d650 [shape=record, label = " {0x5595adb1d650 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 6]
-node0x5595adb1d770 [shape=record, label = " {0x5595adb1d770 | 4 | 2 | cos|{0x5595adb1d750 | (nil)}}", rang = 1]
-node0x5595adb1d750 [shape=record, label = " {0x5595adb1d750 | 3 | 5 |  ^|{0x5595adb1d710 | 0x5595adb1d730}}", rang = 2]
-node0x5595adb1d710 [shape=record, label = " {0x5595adb1d710 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 3]
-node0x5595adb1d730 [shape=record, label = " {0x5595adb1d730 | 1 | 7 |  7|{0x3 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1f6a0 [shape=record, label = " {0x5595adb1f6a0 | 3 | 4 |  :|{0x5595adb1f5c0 | 0x5595adb1f680}}", rang = 0]
-node0x5595adb1f5c0 [shape=record, label = " {0x5595adb1f5c0 | 3 | 2 |  -|{0x5595adb1f5a0 | 0x5595adb1f580}}", rang = 1]
-node0x5595adb1f5a0 [shape=record, label = " {0x5595adb1f5a0 | 3 | 3 |  *|{0x5595adb1f140 | 0x5595adb1ff00}}", rang = 2]
-node0x5595adb1f140 [shape=record, label = " {0x5595adb1f140 | 3 | 1 |  +|{0x5595adb1f120 | 0x5595adb1fe80}}", rang = 3]
-node0x5595adb1f120 [shape=record, label = " {0x5595adb1f120 | 3 | 1 |  +|{0x5595adb1f100 | 0x5595adb1f0e0}}", rang = 4]
-node0x5595adb1f100 [shape=record, label = " {0x5595adb1f100 | 3 | 3 |  *|{0x5595adb1f760 | 0x5595adb1f0c0}}", rang = 5]
-node0x5595adb1f760 [shape=record, label = " {0x5595adb1f760 | 4 | 2 | cos|{0x5595adb1f740 | (nil)}}", rang = 6]
-node0x5595adb1f740 [shape=record, label = " {0x5595adb1f740 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
-node0x5595adb1f0c0 [shape=record, label = " {0x5595adb1f0c0 | 3 | 7 |  ^|{0x5595adb1f780 | 0x5595adb1f0a0}}", rang = 6]
-node0x5595adb1f780 [shape=record, label = " {0x5595adb1f780 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 7]
-node0x5595adb1f0a0 [shape=record, label = " {0x5595adb1f0a0 | 3 | 5 |  ^|{0x5595adb1f7a0 | 0x5595adb1f7c0}}", rang = 7]
-node0x5595adb1f7a0 [shape=record, label = " {0x5595adb1f7a0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 8]
-node0x5595adb1f7c0 [shape=record, label = " {0x5595adb1f7c0 | 1 | 2 |  2|{0x8 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1f0e0 [shape=record, label = " {0x5595adb1f0e0 | 3 | 3 |  *|{0x5595adb1f820 | 0x5595adb1efe0}}", rang = 5]
-node0x5595adb1f820 [shape=record, label = " {0x5595adb1f820 | 4 | 1 | sin|{0x5595adb1f800 | (nil)}}", rang = 6]
-node0x5595adb1f800 [shape=record, label = " {0x5595adb1f800 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
-node0x5595adb1efe0 [shape=record, label = " {0x5595adb1efe0 | 3 | 3 |  *|{0x5595adb1ef20 | 0x5595adb1efc0}}", rang = 6]
-node0x5595adb1ef20 [shape=record, label = " {0x5595adb1ef20 | 3 | 7 |  ^|{0x5595adb1f840 | 0x5595adb1ef00}}", rang = 7]
-node0x5595adb1f840 [shape=record, label = " {0x5595adb1f840 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 8]
-node0x5595adb1ef00 [shape=record, label = " {0x5595adb1ef00 | 3 | 5 |  ^|{0x5595adb1f860 | 0x5595adb1f880}}", rang = 8]
-node0x5595adb1f860 [shape=record, label = " {0x5595adb1f860 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 9]
-node0x5595adb1f880 [shape=record, label = " {0x5595adb1f880 | 1 | 2 |  2|{0x9 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1efc0 [shape=record, label = " {0x5595adb1efc0 | 3 | 3 |  *|{0x5595adb1f8e0 | 0x5595adb1f900}}", rang = 7]
-node0x5595adb1f8e0 [shape=record, label = " {0x5595adb1f8e0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 8]
-node0x5595adb1f900 [shape=record, label = " {0x5595adb1f900 | 1 | 2 |  2|{0x8 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fe80 [shape=record, label = " {0x5595adb1fe80 | 3 | 3 |  *|{0x5595adb1fbc0 | 0x5595adb1fe60}}", rang = 4]
-node0x5595adb1fbc0 [shape=record, label = " {0x5595adb1fbc0 | 1 | 4 |  4|{0x5 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fe60 [shape=record, label = " {0x5595adb1fe60 | 3 | 3 |  *|{0x5595adb1fd60 | 0x5595adb1fe40}}", rang = 5]
-node0x5595adb1fd60 [shape=record, label = " {0x5595adb1fd60 | 3 | 4 |  :|{0x5595adb1fc20 | 0x5595adb1fd40}}", rang = 6]
-node0x5595adb1fc20 [shape=record, label = " {0x5595adb1fc20 | 1 | 1 |  1|{0x7 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fd40 [shape=record, label = " {0x5595adb1fd40 | 3 | 1 |  +|{0x5595adb1fc40 | 0x5595adb1fd20}}", rang = 7]
-node0x5595adb1fc40 [shape=record, label = " {0x5595adb1fc40 | 1 | 1 |  1|{0x8 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fd20 [shape=record, label = " {0x5595adb1fd20 | 3 | 5 |  ^|{0x5595adb1fce0 | 0x5595adb1fd00}}", rang = 8]
-node0x5595adb1fce0 [shape=record, label = " {0x5595adb1fce0 | 3 | 1 |  +|{0x5595adb1fc60 | 0x5595adb1fcc0}}", rang = 9]
-node0x5595adb1fc60 [shape=record, label = " {0x5595adb1fc60 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 10]
-node0x5595adb1fcc0 [shape=record, label = " {0x5595adb1fcc0 | 3 | 4 |  :|{0x5595adb1fc80 | 0x5595adb1fca0}}", rang = 10]
-node0x5595adb1fc80 [shape=record, label = " {0x5595adb1fc80 | 1 | 2 |  2|{0xb | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fca0 [shape=record, label = " {0x5595adb1fca0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 11]
-node0x5595adb1fd00 [shape=record, label = " {0x5595adb1fd00 | 1 | 2 |  2|{0x9 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fe40 [shape=record, label = " {0x5595adb1fe40 | 3 | 1 |  +|{0x5595adb1fd80 | 0x5595adb1fe20}}", rang = 6]
-node0x5595adb1fd80 [shape=record, label = " {0x5595adb1fd80 | 1 | 1 |  1|{0x7 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fe20 [shape=record, label = " {0x5595adb1fe20 | 3 | 4 |  :|{0x5595adb1fda0 | 0x5595adb1fe00}}", rang = 7]
-node0x5595adb1fda0 [shape=record, label = " {0x5595adb1fda0 | 1 | 2 |  2|{0x8 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1fe00 [shape=record, label = " {0x5595adb1fe00 | 3 | 5 |  ^|{0x5595adb1fdc0 | 0x5595adb1fde0}}", rang = 8]
-node0x5595adb1fdc0 [shape=record, label = " {0x5595adb1fdc0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 9]
-node0x5595adb1fde0 [shape=record, label = " {0x5595adb1fde0 | 1 | 2 |  2|{0x9 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1ff00 [shape=record, label = " {0x5595adb1ff00 | 4 | 2 | cos|{0x5595adb1fee0 | (nil)}}", rang = 3]
-node0x5595adb1fee0 [shape=record, label = " {0x5595adb1fee0 | 3 | 5 |  ^|{0x5595adb1fea0 | 0x5595adb1fec0}}", rang = 4]
-node0x5595adb1fea0 [shape=record, label = " {0x5595adb1fea0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 5]
-node0x5595adb1fec0 [shape=record, label = " {0x5595adb1fec0 | 1 | 7 |  7|{0x5 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1f580 [shape=record, label = " {0x5595adb1f580 | 3 | 3 |  *|{0x5595adb1f4e0 | 0x5595adb1f2c0}}", rang = 2]
-node0x5595adb1f4e0 [shape=record, label = " {0x5595adb1f4e0 | 3 | 1 |  +|{0x5595adb1f3c0 | 0x5595adb1f4c0}}", rang = 3]
-node0x5595adb1f3c0 [shape=record, label = " {0x5595adb1f3c0 | 3 | 3 |  *|{0x5595adb1ff60 | 0x5595adb1f3a0}}", rang = 4]
-node0x5595adb1ff60 [shape=record, label = " {0x5595adb1ff60 | 4 | 1 | sin|{0x5595adb1ff40 | (nil)}}", rang = 5]
-node0x5595adb1ff40 [shape=record, label = " {0x5595adb1ff40 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 6]
-node0x5595adb1f3a0 [shape=record, label = " {0x5595adb1f3a0 | 3 | 7 |  ^|{0x5595adb1ff80 | 0x5595adb1f380}}", rang = 5]
-node0x5595adb1ff80 [shape=record, label = " {0x5595adb1ff80 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 6]
-node0x5595adb1f380 [shape=record, label = " {0x5595adb1f380 | 3 | 5 |  ^|{0x5595adb1ffa0 | 0x5595adb1ffc0}}", rang = 6]
-node0x5595adb1ffa0 [shape=record, label = " {0x5595adb1ffa0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
-node0x5595adb1ffc0 [shape=record, label = " {0x5595adb1ffc0 | 1 | 2 |  2|{0x7 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1f4c0 [shape=record, label = " {0x5595adb1f4c0 | 3 | 3 |  *|{0x5595adb1ffe0 | 0x5595adb20100}}", rang = 4]
-node0x5595adb1ffe0 [shape=record, label = " {0x5595adb1ffe0 | 1 | 4 |  4|{0x5 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb20100 [shape=record, label = " {0x5595adb20100 | 4 | 7 | arctg|{0x5595adb200e0 | (nil)}}", rang = 5]
-node0x5595adb200e0 [shape=record, label = " {0x5595adb200e0 | 3 | 1 |  +|{0x5595adb20060 | 0x5595adb200c0}}", rang = 6]
-node0x5595adb20060 [shape=record, label = " {0x5595adb20060 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
-node0x5595adb200c0 [shape=record, label = " {0x5595adb200c0 | 3 | 4 |  :|{0x5595adb20080 | 0x5595adb200a0}}", rang = 7]
-node0x5595adb20080 [shape=record, label = " {0x5595adb20080 | 1 | 2 |  2|{0x8 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb200a0 [shape=record, label = " {0x5595adb200a0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 8]
-node0x5595adb1f2c0 [shape=record, label = " {0x5595adb1f2c0 | 3 | 3 |  *|{0x5595adb1f2a0 | 0x5595adb1f1e0}}", rang = 3]
-node0x5595adb1f2a0 [shape=record, label = " {0x5595adb1f2a0 | 3 | 3 |  *|{0x5595adb20120 | 0x5595adb201e0}}", rang = 4]
-node0x5595adb20120 [shape=record, label = " {0x5595adb20120 | 1 | -1 |  -1|{0x5 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb201e0 [shape=record, label = " {0x5595adb201e0 | 4 | 1 | sin|{0x5595adb201c0 | (nil)}}", rang = 5]
-node0x5595adb201c0 [shape=record, label = " {0x5595adb201c0 | 3 | 5 |  ^|{0x5595adb20180 | 0x5595adb201a0}}", rang = 6]
-node0x5595adb20180 [shape=record, label = " {0x5595adb20180 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
-node0x5595adb201a0 [shape=record, label = " {0x5595adb201a0 | 1 | 7 |  7|{0x7 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1f1e0 [shape=record, label = " {0x5595adb1f1e0 | 3 | 3 |  *|{0x5595adb1f1c0 | 0x5595adb20240}}", rang = 4]
-node0x5595adb1f1c0 [shape=record, label = " {0x5595adb1f1c0 | 3 | 5 |  ^|{0x5595adb20200 | 0x5595adb20220}}", rang = 5]
-node0x5595adb20200 [shape=record, label = " {0x5595adb20200 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 6]
-node0x5595adb20220 [shape=record, label = " {0x5595adb20220 | 1 | 6 |  6|{0x6 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb20240 [shape=record, label = " {0x5595adb20240 | 1 | 7 |  7|{0x5 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1f680 [shape=record, label = " {0x5595adb1f680 | 3 | 5 |  ^|{0x5595adb20300 | 0x5595adb20320}}", rang = 1]
-node0x5595adb20300 [shape=record, label = " {0x5595adb20300 | 4 | 2 | cos|{0x5595adb202e0 | (nil)}}", rang = 2]
-node0x5595adb202e0 [shape=record, label = " {0x5595adb202e0 | 3 | 5 |  ^|{0x5595adb202a0 | 0x5595adb202c0}}", rang = 3]
-node0x5595adb202a0 [shape=record, label = " {0x5595adb202a0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
-node0x5595adb202c0 [shape=record, label = " {0x5595adb202c0 | 1 | 7 |  7|{0x4 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb20320 [shape=record, label = " {0x5595adb20320 | 1 | 2 |  2|{0x2 | 0x55959e4be2f0}}", rang = -1380842688]
-node0x5595adb1d790 -> node0x5595adb1d6f0
-node0x5595adb1d790 -> node0x5595adb1d770
-node0x5595adb1d6f0 -> node0x5595adb1d5d0
-node0x5595adb1d6f0 -> node0x5595adb1d6d0
-node0x5595adb1d5d0 -> node0x5595adb1d4f0
-node0x5595adb1d5d0 -> node0x5595adb1d5b0
-node0x5595adb1d4f0 -> node0x5595adb1d4d0
-node0x5595adb1d5b0 -> node0x5595adb1d590
-node0x5595adb1d5b0 -> node0x5595adb1d570
-node0x5595adb1d570 -> node0x5595adb1d530
-node0x5595adb1d570 -> node0x5595adb1d550
-node0x5595adb1d6d0 -> node0x5595adb1d5f0
-node0x5595adb1d6d0 -> node0x5595adb1d6b0
-node0x5595adb1d6b0 -> node0x5595adb1d690
-node0x5595adb1d690 -> node0x5595adb1d610
-node0x5595adb1d690 -> node0x5595adb1d670
-node0x5595adb1d670 -> node0x5595adb1d630
-node0x5595adb1d670 -> node0x5595adb1d650
-node0x5595adb1d770 -> node0x5595adb1d750
-node0x5595adb1d750 -> node0x5595adb1d710
-node0x5595adb1d750 -> node0x5595adb1d730
-node0x5595adb1f6a0 -> node0x5595adb1f5c0
-node0x5595adb1f6a0 -> node0x5595adb1f680
-node0x5595adb1f5c0 -> node0x5595adb1f5a0
-node0x5595adb1f5c0 -> node0x5595adb1f580
-node0x5595adb1f5a0 -> node0x5595adb1f140
-node0x5595adb1f5a0 -> node0x5595adb1ff00
-node0x5595adb1f140 -> node0x5595adb1f120
-node0x5595adb1f140 -> node0x5595adb1fe80
-node0x5595adb1f120 -> node0x5595adb1f100
-node0x5595adb1f120 -> node0x5595adb1f0e0
-node0x5595adb1f100 -> node0x5595adb1f760
-node0x5595adb1f100 -> node0x5595adb1f0c0
-node0x5595adb1f760 -> node0x5595adb1f740
-node0x5595adb1f0c0 -> node0x5595adb1f780
-node0x5595adb1f0c0 -> node0x5595adb1f0a0
-node0x5595adb1f0a0 -> node0x5595adb1f7a0
-node0x5595adb1f0a0 -> node0x5595adb1f7c0
-node0x5595adb1f0e0 -> node0x5595adb1f820
-node0x5595adb1f0e0 -> node0x5595adb1efe0
-node0x5595adb1f820 -> node0x5595adb1f800
-node0x5595adb1efe0 -> node0x5595adb1ef20
-node0x5595adb1efe0 -> node0x5595adb1efc0
-node0x5595adb1ef20 -> node0x5595adb1f840
-node0x5595adb1ef20 -> node0x5595adb1ef00
-node0x5595adb1ef00 -> node0x5595adb1f860
-node0x5595adb1ef00 -> node0x5595adb1f880
-node0x5595adb1efc0 -> node0x5595adb1f8e0
-node0x5595adb1efc0 -> node0x5595adb1f900
-node0x5595adb1fe80 -> node0x5595adb1fbc0
-node0x5595adb1fe80 -> node0x5595adb1fe60
-node0x5595adb1fe60 -> node0x5595adb1fd60
-node0x5595adb1fe60 -> node0x5595adb1fe40
-node0x5595adb1fd60 -> node0x5595adb1fc20
-node0x5595adb1fd60 -> node0x5595adb1fd40
-node0x5595adb1fd40 -> node0x5595adb1fc40
-node0x5595adb1fd40 -> node0x5595adb1fd20
-node0x5595adb1fd20 -> node0x5595adb1fce0
-node0x5595adb1fd20 -> node0x5595adb1fd00
-node0x5595adb1fce0 -> node0x5595adb1fc60
-node0x5595adb1fce0 -> node0x5595adb1fcc0
-node0x5595adb1fcc0 -> node0x5595adb1fc80
-node0x5595adb1fcc0 -> node0x5595adb1fca0
-node0x5595adb1fe40 -> node0x5595adb1fd80
-node0x5595adb1fe40 -> node0x5595adb1fe20
-node0x5595adb1fe20 -> node0x5595adb1fda0
-node0x5595adb1fe20 -> node0x5595adb1fe00
-node0x5595adb1fe00 -> node0x5595adb1fdc0
-node0x5595adb1fe00 -> node0x5595adb1fde0
-node0x5595adb1ff00 -> node0x5595adb1fee0
-node0x5595adb1fee0 -> node0x5595adb1fea0
-node0x5595adb1fee0 -> node0x5595adb1fec0
-node0x5595adb1f580 -> node0x5595adb1f4e0
-node0x5595adb1f580 -> node0x5595adb1f2c0
-node0x5595adb1f4e0 -> node0x5595adb1f3c0
-node0x5595adb1f4e0 -> node0x5595adb1f4c0
-node0x5595adb1f3c0 -> node0x5595adb1ff60
-node0x5595adb1f3c0 -> node0x5595adb1f3a0
-node0x5595adb1ff60 -> node0x5595adb1ff40
-node0x5595adb1f3a0 -> node0x5595adb1ff80
-node0x5595adb1f3a0 -> node0x5595adb1f380
-node0x5595adb1f380 -> node0x5595adb1ffa0
-node0x5595adb1f380 -> node0x5595adb1ffc0
-node0x5595adb1f4c0 -> node0x5595adb1ffe0
-node0x5595adb1f4c0 -> node0x5595adb20100
-node0x5595adb20100 -> node0x5595adb200e0
-node0x5595adb200e0 -> node0x5595adb20060
-node0x5595adb200e0 -> node0x5595adb200c0
-node0x5595adb200c0 -> node0x5595adb20080
-node0x5595adb200c0 -> node0x5595adb200a0
-node0x5595adb1f2c0 -> node0x5595adb1f2a0
-node0x5595adb1f2c0 -> node0x5595adb1f1e0
-node0x5595adb1f2a0 -> node0x5595adb20120
-node0x5595adb1f2a0 -> node0x5595adb201e0
-node0x5595adb201e0 -> node0x5595adb201c0
-node0x5595adb201c0 -> node0x5595adb20180
-node0x5595adb201c0 -> node0x5595adb201a0
-node0x5595adb1f1e0 -> node0x5595adb1f1c0
-node0x5595adb1f1e0 -> node0x5595adb20240
-node0x5595adb1f1c0 -> node0x5595adb20200
-node0x5595adb1f1c0 -> node0x5595adb20220
-node0x5595adb1f680 -> node0x5595adb20300
-node0x5595adb1f680 -> node0x5595adb20320
-node0x5595adb20300 -> node0x5595adb202e0
-node0x5595adb202e0 -> node0x5595adb202a0
-node0x5595adb202e0 -> node0x5595adb202c0
+node0x5614caa9b6d0 [shape=record, label = " {0x5614caa9b6d0 | 3 | 4 |  :|{0x5614caa9b5d0 | 0x5614caa9b6b0}}", rang = 0]
+node0x5614caa9b5d0 [shape=record, label = " {0x5614caa9b5d0 | 3 | 1 |  +|{0x5614caa9b590 | 0x5614caa9b5b0}}", rang = 1]
+node0x5614caa9b590 [shape=record, label = " {0x5614caa9b590 | 3 | 3 |  *|{0x5614caa9b4f0 | 0x5614caa9b570}}", rang = 2]
+node0x5614caa9b4f0 [shape=record, label = " {0x5614caa9b4f0 | 4 | 1 | sin|{0x5614caa9b4d0 | (nil)}}", rang = 3]
+node0x5614caa9b4d0 [shape=record, label = " {0x5614caa9b4d0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
+node0x5614caa9b570 [shape=record, label = " {0x5614caa9b570 | 3 | 7 |  ^|{0x5614caa9b550 | 0x5614caa9b530}}", rang = 3]
+node0x5614caa9b550 [shape=record, label = " {0x5614caa9b550 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 4]
+node0x5614caa9b530 [shape=record, label = " {0x5614caa9b530 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
+node0x5614caa9b5b0 [shape=record, label = " {0x5614caa9b5b0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 2]
+node0x5614caa9b6b0 [shape=record, label = " {0x5614caa9b6b0 | 3 | 1 |  +|{0x5614caa9b650 | 0x5614caa9b690}}", rang = 1]
+node0x5614caa9b650 [shape=record, label = " {0x5614caa9b650 | 4 | 2 | cos|{0x5614caa9b630 | (nil)}}", rang = 2]
+node0x5614caa9b630 [shape=record, label = " {0x5614caa9b630 | 3 | 5 |  ^|{0x5614caa9b5f0 | 0x5614caa9b610}}", rang = 3]
+node0x5614caa9b5f0 [shape=record, label = " {0x5614caa9b5f0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
+node0x5614caa9b610 [shape=record, label = " {0x5614caa9b610 | 1 | 7 |  7|{0x4 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9b690 [shape=record, label = " {0x5614caa9b690 | 4 | 7 | arctg|{0x5614caa9b670 | (nil)}}", rang = 2]
+node0x5614caa9b670 [shape=record, label = " {0x5614caa9b670 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 3]
+node0x5614caa9d160 [shape=record, label = " {0x5614caa9d160 | 3 | 4 |  :|{0x5614caa9d020 | 0x5614caa9d140}}", rang = 0]
+node0x5614caa9d020 [shape=record, label = " {0x5614caa9d020 | 3 | 2 |  -|{0x5614caa9d000 | 0x5614caa9cfe0}}", rang = 1]
+node0x5614caa9d000 [shape=record, label = " {0x5614caa9d000 | 3 | 3 |  *|{0x5614caa9cb20 | 0x5614caa9cfc0}}", rang = 2]
+node0x5614caa9cb20 [shape=record, label = " {0x5614caa9cb20 | 3 | 1 |  +|{0x5614caa9cb00 | 0x5614caa9d3a0}}", rang = 3]
+node0x5614caa9cb00 [shape=record, label = " {0x5614caa9cb00 | 3 | 1 |  +|{0x5614caa9cae0 | 0x5614caa9cac0}}", rang = 4]
+node0x5614caa9cae0 [shape=record, label = " {0x5614caa9cae0 | 3 | 3 |  *|{0x5614caa9d220 | 0x5614caa9caa0}}", rang = 5]
+node0x5614caa9d220 [shape=record, label = " {0x5614caa9d220 | 4 | 2 | cos|{0x5614caa9d200 | (nil)}}", rang = 6]
+node0x5614caa9d200 [shape=record, label = " {0x5614caa9d200 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9caa0 [shape=record, label = " {0x5614caa9caa0 | 3 | 7 |  ^|{0x5614caa9d240 | 0x5614caa9d260}}", rang = 6]
+node0x5614caa9d240 [shape=record, label = " {0x5614caa9d240 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9d260 [shape=record, label = " {0x5614caa9d260 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9cac0 [shape=record, label = " {0x5614caa9cac0 | 3 | 3 |  *|{0x5614caa9d2c0 | 0x5614caa9d380}}", rang = 5]
+node0x5614caa9d2c0 [shape=record, label = " {0x5614caa9d2c0 | 4 | 1 | sin|{0x5614caa9d2a0 | (nil)}}", rang = 6]
+node0x5614caa9d2a0 [shape=record, label = " {0x5614caa9d2a0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9d380 [shape=record, label = " {0x5614caa9d380 | 3 | 7 |  ^|{0x5614caa9d340 | 0x5614caa9d360}}", rang = 6]
+node0x5614caa9d340 [shape=record, label = " {0x5614caa9d340 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9d360 [shape=record, label = " {0x5614caa9d360 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9d3a0 [shape=record, label = " {0x5614caa9d3a0 | 1 | 1 |  1|{0x4 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9cfc0 [shape=record, label = " {0x5614caa9cfc0 | 3 | 1 |  +|{0x5614caa9d460 | 0x5614caa9d4c0}}", rang = 3]
+node0x5614caa9d460 [shape=record, label = " {0x5614caa9d460 | 4 | 2 | cos|{0x5614caa9d440 | (nil)}}", rang = 4]
+node0x5614caa9d440 [shape=record, label = " {0x5614caa9d440 | 3 | 5 |  ^|{0x5614caa9d400 | 0x5614caa9d420}}", rang = 5]
+node0x5614caa9d400 [shape=record, label = " {0x5614caa9d400 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 6]
+node0x5614caa9d420 [shape=record, label = " {0x5614caa9d420 | 1 | 7 |  7|{0x6 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d4c0 [shape=record, label = " {0x5614caa9d4c0 | 4 | 7 | arctg|{0x5614caa9d4a0 | (nil)}}", rang = 4]
+node0x5614caa9d4a0 [shape=record, label = " {0x5614caa9d4a0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 5]
+node0x5614caa9cfe0 [shape=record, label = " {0x5614caa9cfe0 | 3 | 3 |  *|{0x5614caa9cee0 | 0x5614caa9cde0}}", rang = 2]
+node0x5614caa9cee0 [shape=record, label = " {0x5614caa9cee0 | 3 | 1 |  +|{0x5614caa9cea0 | 0x5614caa9d580}}", rang = 3]
+node0x5614caa9cea0 [shape=record, label = " {0x5614caa9cea0 | 3 | 3 |  *|{0x5614caa9d520 | 0x5614caa9ce80}}", rang = 4]
+node0x5614caa9d520 [shape=record, label = " {0x5614caa9d520 | 4 | 1 | sin|{0x5614caa9d500 | (nil)}}", rang = 5]
+node0x5614caa9d500 [shape=record, label = " {0x5614caa9d500 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 6]
+node0x5614caa9ce80 [shape=record, label = " {0x5614caa9ce80 | 3 | 7 |  ^|{0x5614caa9d540 | 0x5614caa9d560}}", rang = 5]
+node0x5614caa9d540 [shape=record, label = " {0x5614caa9d540 | 5 | 0 |  e|{(nil) | (nil)}}", rang = 6]
+node0x5614caa9d560 [shape=record, label = " {0x5614caa9d560 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 6]
+node0x5614caa9d580 [shape=record, label = " {0x5614caa9d580 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
+node0x5614caa9cde0 [shape=record, label = " {0x5614caa9cde0 | 3 | 1 |  +|{0x5614caa9cdc0 | 0x5614caa9d840}}", rang = 3]
+node0x5614caa9cdc0 [shape=record, label = " {0x5614caa9cdc0 | 3 | 3 |  *|{0x5614caa9cda0 | 0x5614caa9cce0}}", rang = 4]
+node0x5614caa9cda0 [shape=record, label = " {0x5614caa9cda0 | 3 | 3 |  *|{0x5614caa9d5a0 | 0x5614caa9d660}}", rang = 5]
+node0x5614caa9d5a0 [shape=record, label = " {0x5614caa9d5a0 | 1 | -1 |  -1|{0x6 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d660 [shape=record, label = " {0x5614caa9d660 | 4 | 1 | sin|{0x5614caa9d640 | (nil)}}", rang = 6]
+node0x5614caa9d640 [shape=record, label = " {0x5614caa9d640 | 3 | 5 |  ^|{0x5614caa9d600 | 0x5614caa9d620}}", rang = 7]
+node0x5614caa9d600 [shape=record, label = " {0x5614caa9d600 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 8]
+node0x5614caa9d620 [shape=record, label = " {0x5614caa9d620 | 1 | 7 |  7|{0x8 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9cce0 [shape=record, label = " {0x5614caa9cce0 | 3 | 3 |  *|{0x5614caa9ccc0 | 0x5614caa9d6c0}}", rang = 5]
+node0x5614caa9ccc0 [shape=record, label = " {0x5614caa9ccc0 | 3 | 5 |  ^|{0x5614caa9d680 | 0x5614caa9d6a0}}", rang = 6]
+node0x5614caa9d680 [shape=record, label = " {0x5614caa9d680 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9d6a0 [shape=record, label = " {0x5614caa9d6a0 | 1 | 6 |  6|{0x7 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d6c0 [shape=record, label = " {0x5614caa9d6c0 | 1 | 7 |  7|{0x6 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d840 [shape=record, label = " {0x5614caa9d840 | 3 | 4 |  :|{0x5614caa9d780 | 0x5614caa9d820}}", rang = 4]
+node0x5614caa9d780 [shape=record, label = " {0x5614caa9d780 | 1 | 1 |  1|{0x5 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d820 [shape=record, label = " {0x5614caa9d820 | 3 | 1 |  +|{0x5614caa9d7a0 | 0x5614caa9d800}}", rang = 5]
+node0x5614caa9d7a0 [shape=record, label = " {0x5614caa9d7a0 | 1 | 1 |  1|{0x6 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d800 [shape=record, label = " {0x5614caa9d800 | 3 | 5 |  ^|{0x5614caa9d7c0 | 0x5614caa9d7e0}}", rang = 6]
+node0x5614caa9d7c0 [shape=record, label = " {0x5614caa9d7c0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 7]
+node0x5614caa9d7e0 [shape=record, label = " {0x5614caa9d7e0 | 1 | 2 |  2|{0x7 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d140 [shape=record, label = " {0x5614caa9d140 | 3 | 5 |  ^|{0x5614caa9d100 | 0x5614caa9d980}}", rang = 1]
+node0x5614caa9d100 [shape=record, label = " {0x5614caa9d100 | 3 | 1 |  +|{0x5614caa9d900 | 0x5614caa9d960}}", rang = 2]
+node0x5614caa9d900 [shape=record, label = " {0x5614caa9d900 | 4 | 2 | cos|{0x5614caa9d8e0 | (nil)}}", rang = 3]
+node0x5614caa9d8e0 [shape=record, label = " {0x5614caa9d8e0 | 3 | 5 |  ^|{0x5614caa9d8a0 | 0x5614caa9d8c0}}", rang = 4]
+node0x5614caa9d8a0 [shape=record, label = " {0x5614caa9d8a0 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 5]
+node0x5614caa9d8c0 [shape=record, label = " {0x5614caa9d8c0 | 1 | 7 |  7|{0x5 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9d960 [shape=record, label = " {0x5614caa9d960 | 4 | 7 | arctg|{0x5614caa9d940 | (nil)}}", rang = 3]
+node0x5614caa9d940 [shape=record, label = " {0x5614caa9d940 | 2 | 0 |  x|{(nil) | (nil)}}", rang = 4]
+node0x5614caa9d980 [shape=record, label = " {0x5614caa9d980 | 1 | 2 |  2|{0x2 | 0x5614aad54cd0}}", rang = -894838368]
+node0x5614caa9b6d0 -> node0x5614caa9b5d0
+node0x5614caa9b6d0 -> node0x5614caa9b6b0
+node0x5614caa9b5d0 -> node0x5614caa9b590
+node0x5614caa9b5d0 -> node0x5614caa9b5b0
+node0x5614caa9b590 -> node0x5614caa9b4f0
+node0x5614caa9b590 -> node0x5614caa9b570
+node0x5614caa9b4f0 -> node0x5614caa9b4d0
+node0x5614caa9b570 -> node0x5614caa9b550
+node0x5614caa9b570 -> node0x5614caa9b530
+node0x5614caa9b6b0 -> node0x5614caa9b650
+node0x5614caa9b6b0 -> node0x5614caa9b690
+node0x5614caa9b650 -> node0x5614caa9b630
+node0x5614caa9b630 -> node0x5614caa9b5f0
+node0x5614caa9b630 -> node0x5614caa9b610
+node0x5614caa9b690 -> node0x5614caa9b670
+node0x5614caa9d160 -> node0x5614caa9d020
+node0x5614caa9d160 -> node0x5614caa9d140
+node0x5614caa9d020 -> node0x5614caa9d000
+node0x5614caa9d020 -> node0x5614caa9cfe0
+node0x5614caa9d000 -> node0x5614caa9cb20
+node0x5614caa9d000 -> node0x5614caa9cfc0
+node0x5614caa9cb20 -> node0x5614caa9cb00
+node0x5614caa9cb20 -> node0x5614caa9d3a0
+node0x5614caa9cb00 -> node0x5614caa9cae0
+node0x5614caa9cb00 -> node0x5614caa9cac0
+node0x5614caa9cae0 -> node0x5614caa9d220
+node0x5614caa9cae0 -> node0x5614caa9caa0
+node0x5614caa9d220 -> node0x5614caa9d200
+node0x5614caa9caa0 -> node0x5614caa9d240
+node0x5614caa9caa0 -> node0x5614caa9d260
+node0x5614caa9cac0 -> node0x5614caa9d2c0
+node0x5614caa9cac0 -> node0x5614caa9d380
+node0x5614caa9d2c0 -> node0x5614caa9d2a0
+node0x5614caa9d380 -> node0x5614caa9d340
+node0x5614caa9d380 -> node0x5614caa9d360
+node0x5614caa9cfc0 -> node0x5614caa9d460
+node0x5614caa9cfc0 -> node0x5614caa9d4c0
+node0x5614caa9d460 -> node0x5614caa9d440
+node0x5614caa9d440 -> node0x5614caa9d400
+node0x5614caa9d440 -> node0x5614caa9d420
+node0x5614caa9d4c0 -> node0x5614caa9d4a0
+node0x5614caa9cfe0 -> node0x5614caa9cee0
+node0x5614caa9cfe0 -> node0x5614caa9cde0
+node0x5614caa9cee0 -> node0x5614caa9cea0
+node0x5614caa9cee0 -> node0x5614caa9d580
+node0x5614caa9cea0 -> node0x5614caa9d520
+node0x5614caa9cea0 -> node0x5614caa9ce80
+node0x5614caa9d520 -> node0x5614caa9d500
+node0x5614caa9ce80 -> node0x5614caa9d540
+node0x5614caa9ce80 -> node0x5614caa9d560
+node0x5614caa9cde0 -> node0x5614caa9cdc0
+node0x5614caa9cde0 -> node0x5614caa9d840
+node0x5614caa9cdc0 -> node0x5614caa9cda0
+node0x5614caa9cdc0 -> node0x5614caa9cce0
+node0x5614caa9cda0 -> node0x5614caa9d5a0
+node0x5614caa9cda0 -> node0x5614caa9d660
+node0x5614caa9d660 -> node0x5614caa9d640
+node0x5614caa9d640 -> node0x5614caa9d600
+node0x5614caa9d640 -> node0x5614caa9d620
+node0x5614caa9cce0 -> node0x5614caa9ccc0
+node0x5614caa9cce0 -> node0x5614caa9d6c0
+node0x5614caa9ccc0 -> node0x5614caa9d680
+node0x5614caa9ccc0 -> node0x5614caa9d6a0
+node0x5614caa9d840 -> node0x5614caa9d780
+node0x5614caa9d840 -> node0x5614caa9d820
+node0x5614caa9d820 -> node0x5614caa9d7a0
+node0x5614caa9d820 -> node0x5614caa9d800
+node0x5614caa9d800 -> node0x5614caa9d7c0
+node0x5614caa9d800 -> node0x5614caa9d7e0
+node0x5614caa9d140 -> node0x5614caa9d100
+node0x5614caa9d140 -> node0x5614caa9d980
+node0x5614caa9d100 -> node0x5614caa9d900
+node0x5614caa9d100 -> node0x5614caa9d960
+node0x5614caa9d900 -> node0x5614caa9d8e0
+node0x5614caa9d8e0 -> node0x5614caa9d8a0
+node0x5614caa9d8e0 -> node0x5614caa9d8c0
+node0x5614caa9d960 -> node0x5614caa9d940
 }

@@ -1,1 +1,1 @@
-(sin(x)*(e^(x^2))+4*arctg(x+2/x))/((cos(x)^7))$
+(sin(x)*(e^(x))+x)/((cos(x)^7)+arctg(x))$

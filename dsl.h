@@ -1,8 +1,6 @@
 #ifndef DSL_H_
 #define DSL_H_
 
-//#define E 2.73
-
 #define NUM_(arg) nodeCtor (NUMBER, arg, NULL, NULL)
 
 #define X_ nodeCtor (VARIABLE, X, NULL, NULL)

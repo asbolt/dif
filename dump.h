@@ -17,4 +17,3 @@ bool textPrintNodes (Node *node, FILE *file);
 bool texPrint (Node* node, const char *fileName);
 
 #endif
-
