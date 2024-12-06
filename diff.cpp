@@ -1,8 +1,9 @@
 #include "diff.h"
 #include "dump.h"
 
-#define druki sizeof(stuki)/sizeof(const char*)
-const char* stuki [] = {"Парни (те кто из продвы). Вы чет в край охуели там.\n",
+Node *differentiateAndOptimize(Node *root, FILE *file)
+{
+    const char* stuki [] = {"Парни (те кто из продвы). Вы чет в край охуели там.\n",
                         "Почему мне последние 2-3 недели код показывают только челы с хуавея?\n",
                         "Я понимаю если вам просто лень на пары ходить, но блять, можно же просто зайти ко мне в комнату и показать код.\n",
                         "Если уж вы все такие ебать занятые, то хотя бы прислали бы хоть раз гитхаб.\n",
@@ -11,24 +12,23 @@ const char* stuki [] = {"Парни (те кто из продвы). Вы чет
                         "Вы сейчас жестко подставляете меня, потому что когда пекусы не показывают код дед агрится на менторов и ему хуй объяснишь что это я за вами бегаю и прошу хоть что нибудь показать. \n",
                         "Ну не верю я блять что если вы хотя бы начали писать, у вас нет ни промежуточных версий, ни вопросов.\n",
                         "Если уж поступили на физтех и тем более пошли в продву по проге, то отвечайте пожалуйста за свой выбор\n"};
-int index = 0;
+    int druki = sizeof(stuki)/sizeof(const char*);
+    int stukiIndex = 0;
 
-Node *differentiateAndOptimize(Node *root, FILE *file)
-{
     NodeCheckForErrors (root, VALUES_FOR_ERROR);
 
-    Node *diffNode = differentiate (root, root, file);
+    Node *diffNode = differentiate (root, root, file, stuki, druki, &stukiIndex);
     while (nodeOptimization (diffNode) != diffNode)
     {
         diffNode = nodeOptimization (diffNode);
     }
 
-    dump (WIDE, root, diffNode); // TODO разбить ответ на буквы
+    dump (WIDE, root, diffNode);
 
     return diffNode;
 }
 
-Node *differentiate (Node *node, Node *root, FILE *file)
+Node *differentiate (Node *node, Node *root, FILE *file, const char **stuki, int druki, int *stukiIndex)
 {
     NodeCheckForErrors(node, VALUES_FOR_ERROR);
     Node *diffNode = NULL;
@@ -52,55 +52,55 @@ Node *differentiate (Node *node, Node *root, FILE *file)
     {
         switch (node->value)
         {
-            case ADD:     diffNode = ADD_(DIFF(left), DIFF(right));
+            case ADD:     diffNode = ADD_(DIFF_(left), DIFF_(right));
                           break;
-            case SUB:     diffNode = SUB_(DIFF(left), DIFF(right));
+            case SUB:     diffNode = SUB_(DIFF_(left), DIFF_(right));
                           break;
             case MUL:     {
-                            Node *dl = DIFF(left);
-                            Node *dr = DIFF(right);
-                            Node *l = COPY(left);
-                            Node *r = COPY(right);
+                            Node *dl = DIFF_(left);
+                            Node *dr = DIFF_(right);
+                            Node *l = COPY_SUB_TREE_(left);
+                            Node *r = COPY_SUB_TREE_(right);
                             diffNode = ADD_(MUL_(dl, r), MUL_(l, dr)); 
                             break;
                           }
             case DIV:     {
-                            Node *dl = DIFF(left);
-                            Node *dr = DIFF(right);
-                            Node *l = COPY(left);
-                            Node *r = COPY(right);
+                            Node *dl = DIFF_(left);
+                            Node *dr = DIFF_(right);
+                            Node *l = COPY_SUB_TREE_(left);
+                            Node *r = COPY_SUB_TREE_(right);
                             Node *numerator = SUB_(MUL_(dl, r), MUL_(l, dr));
-                            Node *rDet = COPY(right);
+                            Node *rDet = COPY_SUB_TREE_(right);
                             Node *denominator = POW_(rDet, NUM_(2));
                             diffNode = DIV_(numerator, denominator);
                             break;
                           }
             case POW:     {
-                            Node *ind = COPY(right);
-                            Node *base = POW_(COPY(left), NUM_(node->right->value - 1));
+                            Node *ind = COPY_SUB_TREE_(right);
+                            Node *base = POW_(COPY_SUB_TREE_(left), NUM_(node->right->value - 1));
                             if (node->left->type != CONST && node->left->type != NUMBER)
                             {
                                 diffNode = MUL_(base, ind);
                             } else {
-                                diffNode = MUL_(MUL_(base, ind), DIFF(left));
+                                diffNode = MUL_(MUL_(base, ind), DIFF_(left));
                             }
                             break;
                           }
             case EXP_FUN: {
                             Node *base = copySubtree (node);
                             Node *ln = LOG_(E_, NUM_(node->left->value));
-                            diffNode = MUL_(MUL_(base, ln), DIFF(right));
+                            diffNode = MUL_(MUL_(base, ln), DIFF_(right));
                             break;
                           }
             case EXP:     {
                             Node *exp = copySubtree (node);
-                            Node *ind = DIFF(right);
+                            Node *ind = DIFF_(right);
                             diffNode = MUL_(exp, ind);
                             break;
                           }
             case LOG:     {
-                            Node *num = DIV_(NUM_(1), MUL_(COPY(right), LOG_(NUM_(E), COPY(left))));
-                            diffNode = MUL_(num, DIFF(right));
+                            Node *num = DIV_(NUM_(1), MUL_(COPY_SUB_TREE_(right), LOG_(NUM_(E), COPY_SUB_TREE_(left))));
+                            diffNode = MUL_(num, DIFF_(right));
                             break;
                           }
 
@@ -113,61 +113,61 @@ Node *differentiate (Node *node, Node *root, FILE *file)
         switch (node->value)
         {
             case SIN:    {
-                          diffNode = MUL_(COS_(COPY(left)), DIFF(left));
+                          diffNode = MUL_(COS_(COPY_SUB_TREE_(left)), DIFF_(left));
                           break;
                          }
             case COS:    {
-                          diffNode = MUL_(MUL_(NUM_(-1), SIN_(COPY(left))), DIFF(left));
+                          diffNode = MUL_(MUL_(NUM_(-1), SIN_(COPY_SUB_TREE_(left))), DIFF_(left));
                           break;
                          }
             case TG:     {
-                           Node *denominator = POW_(COS_(COPY(left)), NUM_(2));
+                           Node *denominator = POW_(COS_(COPY_SUB_TREE_(left)), NUM_(2));
                            Node *div = DIV_ (NUM_(1), denominator);
-                           diffNode = MUL_(div, DIFF(left)); 
+                           diffNode = MUL_(div, DIFF_(left)); 
                            break;
                          }
             case CTG:    {
-                           Node *denominator = POW_(SIN_(COPY(left)), NUM_(2));
+                           Node *denominator = POW_(SIN_(COPY_SUB_TREE_(left)), NUM_(2));
                            Node *div = SUB_(NUM_(0), (DIV_(NUM_(1), denominator)));
-                           diffNode = MUL_(div, DIFF(left));
+                           diffNode = MUL_(div, DIFF_(left));
                            break;
                          }
             case ARCSIN: {
-                           Node *base = SUB_(NUM_(1), (POW_(COPY(left), NUM_(2))));
+                           Node *base = SUB_(NUM_(1), (POW_(COPY_SUB_TREE_(left), NUM_(2))));
                            Node *denominator = POW_(base, DIV_(NUM_(1), NUM_(2)));
-                           diffNode = MUL_(DIV_(NUM_(1), denominator), DIFF(left));
+                           diffNode = MUL_(DIV_(NUM_(1), denominator), DIFF_(left));
                            break;
                          }
             case ARCCOS: {
-                           Node *base = SUB_(NUM_(1), (POW_(COPY(left), NUM_(2))));
+                           Node *base = SUB_(NUM_(1), (POW_(COPY_SUB_TREE_(left), NUM_(2))));
                            Node *denominator = POW_(base, DIV_(NUM_(1), NUM_(2)));
-                           diffNode = MUL_(SUB_(NUM_(0), DIV_(NUM_(1), denominator)), DIFF(left));
+                           diffNode = MUL_(SUB_(NUM_(0), DIV_(NUM_(1), denominator)), DIFF_(left));
                            break;
                          }
             case ARCTG:  {
-                           Node *base = ADD_(NUM_(1), (POW_(COPY(left), NUM_(2))));
-                           diffNode = MUL_(DIV_(NUM_(1), base), DIFF(left));
+                           Node *base = ADD_(NUM_(1), (POW_(COPY_SUB_TREE_(left), NUM_(2))));
+                           diffNode = MUL_(DIV_(NUM_(1), base), DIFF_(left));
                            break;
                          }
             case ARCCTG: {
-                           Node *base = ADD_(NUM_(1), (POW_(COPY(left), NUM_(2))));
-                           diffNode = MUL_(SUB_(NUM_(0), DIV_(NUM_(1), base)), DIFF(left));
+                           Node *base = ADD_(NUM_(1), (POW_(COPY_SUB_TREE_(left), NUM_(2))));
+                           diffNode = MUL_(SUB_(NUM_(0), DIV_(NUM_(1), base)), DIFF_(left));
                            break;
                          }
-            case SH:     diffNode = MUL_(CH_(COPY(left)), DIFF(left));
+            case SH:     diffNode = MUL_(CH_(COPY_SUB_TREE_(left)), DIFF_(left));
                          break;
-            case CH:     diffNode = MUL_(SH_(COPY(left)), DIFF(left));
+            case CH:     diffNode = MUL_(SH_(COPY_SUB_TREE_(left)), DIFF_(left));
                          break;
             case TH:     {
-                           Node *denominator = POW_(CH_(COPY(left)), NUM_(2));
+                           Node *denominator = POW_(CH_(COPY_SUB_TREE_(left)), NUM_(2));
                            Node *div = DIV_ (NUM_(1), denominator);
-                           diffNode = MUL_(div, DIFF(left));
+                           diffNode = MUL_(div, DIFF_(left));
                            break; 
                          }
             case CTH:    {
-                           Node *denominator = POW_(SH_(COPY(left)), NUM_(2));
+                           Node *denominator = POW_(SH_(COPY_SUB_TREE_(left)), NUM_(2));
                            Node *div = SUB_(NUM_(0), (DIV_(NUM_(1), denominator)));
-                           diffNode = MUL_(div, DIFF(left));
+                           diffNode = MUL_(div, DIFF_(left));
                            break;
                          }
 
@@ -177,7 +177,7 @@ Node *differentiate (Node *node, Node *root, FILE *file)
 
     if (node != root)
     {
-        printFunc (file, node, diffNode);
+        printFunc (file, node, diffNode, stuki, druki, stukiIndex);
     }
 
     return diffNode;
@@ -192,12 +192,12 @@ Node *copySubtree (Node *node)
 
     if (node->left != NULL)
     {
-        cl = COPY(left);
+        cl = COPY_SUB_TREE_(left);
     }
 
     if (node->right != NULL)
     {
-        cr = COPY(right);
+        cr = COPY_SUB_TREE_(right);
     }
 
     Node *nodeCopy = nodeCtor (node->type, node->value, cl, cr);
@@ -205,7 +205,7 @@ Node *copySubtree (Node *node)
     return nodeCopy; 
 }
 
-bool printFunc (FILE *file, Node *node, Node *diffNode)
+bool printFunc (FILE *file, Node *node, Node *diffNode, const char **stuki, int druki, int *stukiIndex)
 {
     assert (file);
     assert (node);
@@ -213,11 +213,11 @@ bool printFunc (FILE *file, Node *node, Node *diffNode)
 
     if (diffNode->type != NUMBER && diffNode->type != CONST)
     {
-        fprintf (file, "%s", stuki[index]);
-        index++;
-        if (index == druki)
+        fprintf (file, "%s", stuki[*stukiIndex]);
+        (*stukiIndex)++;
+        if (*stukiIndex == druki)
         {
-            index = 0;
+            *stukiIndex = 0;
         }
         
         fprintf (file, "$$(");
@@ -265,15 +265,7 @@ bool makeTexFile (const char *fileName, Node *node)
 
     nodeDtor (diffNode);
 
-    fprintf (file, "\\section{Третий}\nСейчас нужно сходить за гелем для стирки и губками для мытья посуды. Заодно возму тетрадок,\
-                    потому что на следующей неделе опять сдавать дз по матану и ангему. А так как надо сдавать дз, надо будет и \
-                    контрольные писать. А это уже очень печально, особенно с ангемом, потому что уровень знаний по нему у меня не\
-                    повышался со времен прохождения координат в школе (и этот факт вполне подтверждается баллом 1,5/8 по предыдущей\
-                    контрольной).\\\\Кстати сегодня дед начнет язык, и это тоже плохо, потому что когда мне писать язык, если надо готовиться \
-                    к кр, а потом всякое пятое десятое. Ой дай бог еще вот эту поеботу примут, а то вообще нихрена не успею. К тому же заебала \
-                    меня херня эта, уже целый день вьебала, чтобы ввести замену на буквы, и нихуя не вышло, конечно. Да, короче, грустно, \
-                    печально. В общем заключение такое, что главное пережить следующий месяц, а потом зачиллюсь дома на диванчике вместе \
-                    с пересдачей по матану\n");
+    fprintf (file, "\\section{Третий}\nОдни плюсы\n");
     fprintf (file,"\n\\end{document}\n");
 
     return true;

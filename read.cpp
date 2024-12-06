@@ -1,199 +1,112 @@
 #include "read.h"
 
-Node *readFunc (const char *fileName)
+Node *readFunc (Token *tokens[])
 {
-    FILE *file = fopen (fileName, "r");
-    if (file == NULL)
-    {
-        return NULL;
-    }
-
-    fseek (file, 0, SEEK_END);
-    int size = ftell (file);
-    fseek (file, 0, SEEK_SET);
-
-    char *buffer = (char *)calloc (size, sizeof(char));
-    if (buffer == NULL)
-    {
-        return NULL;
-    }
-    fread (buffer, sizeof(char), size, file);
-
     int p = 0;
 
-    Node* val = getSum (buffer, &p);
-    if (buffer[p] != '$')
-        SyntaxError (buffer, &p);
+    Node* val = getSum (tokens, &p);
+    if (tokens[p]->type != EMPTY)
+    {
+        SyntaxError (tokens, &p);
+    }
 
-    free (buffer);
     return val;
 }
 
 
-Node *getBranches (char *buffer, int *p)
+Node *getBranches (Token *tokens[], int *p)
 {
-    if (buffer[*p] == '(')
+    if (tokens[*p]->type == OPERATION && tokens[*p]->value == SKOBKA)
     {
         (*p)++;
-        Node *val = getSum (buffer, p);
-        if (buffer[*p] != ')')
+        Node *val = getSum (tokens, p);
+        if (tokens[*p]->type != OPERATION && tokens[*p]->value != SKOBKA_ZAKR)
         {
-            SyntaxError (buffer, p);
+            SyntaxError (tokens, p);
         }
         (*p)++;
         return val;
     }
     else
-        return getVar (buffer, p);
+        return getVar (tokens, p);
 }
 
-Node *getNumbers (char *buffer, int *p)
+Node *getNumbers (Token *tokens[], int *p)
 {
-    int val = 0;
-    int pOld = *p;
-    while ('0' <= buffer[*p] && buffer[*p] <= '9')
-    {
-        val = val*10 + buffer[*p] - '0';
-        (*p)++;
-    }
-
-    if (pOld == *p)
-        SyntaxError (buffer, p);
-
-    return NUM_(val);
+    (*p)++;
+    return NUM_(tokens[*p - 1]->value);
 }
 
-Node *getSum (char *buffer, int *p)
+Node *getSum (Token *tokens[], int *p)
 {
-    Node *val = getMul (buffer, p);
-    while (buffer[*p] == '+' || buffer[*p] == '-')
+    Node *val = getMul (tokens, p);
+    while (tokens[*p]->type == OPERATION && (tokens[*p]->value == ADD || tokens[*p]->value == SUB))
     {
-        int op = buffer[*p];
+        int op = tokens[*p]->value;
         (*p)++;
-        Node *val2 = getMul (buffer, p);
-        if (op == '+')
+        Node *val2 = getMul (tokens, p);
+        if (op == ADD)
             val = ADD_(val, val2);
         else val = SUB_(val, val2);
     }
     return val;
 }
 
-Node *getMul (char *buffer, int *p)
+Node *getMul (Token *tokens[], int *p)
 {
-    Node *val = getTrig (buffer, p);
+    Node *val = getTrig (tokens, p);
 
-    while (buffer[*p] == '*' || buffer[*p] == '/')
+    while (tokens[*p]->type == OPERATION && (tokens[*p]->value == MUL || tokens[*p]->value == DIV))
     {
-        int op = buffer[*p];
+        int op = tokens[*p]->value;
         (*p)++;
-        Node *val2 = getTrig (buffer, p);
-        if (op == '*')
+        Node *val2 = getTrig (tokens, p);
+        if (op == MUL)
             val = MUL_(val, val2);
         else val = DIV_(val, val2);
     }
     return val;
 }
 
-Node *getTrig (char *buffer, int *p)
+Node *getTrig (Token *tokens[], int *p)
 {
-    if (strncmp (buffer + *p, "sin", _sin) == 0 ||
-        strncmp (buffer + *p, "cos", _cos) == 0 ||
-        strncmp (buffer + *p, "tg", _tg) == 0 ||
-        strncmp (buffer + *p, "ctg", _ctg) == 0 ||
-        strncmp (buffer + *p, "arcsin", _arcsin) == 0 ||
-        strncmp (buffer + *p, "arccos", _arccos) == 0 ||
-        strncmp (buffer + *p, "arctg", _arctg) == 0 ||
-        strncmp (buffer + *p, "arcctg", _arcctg) == 0 ||
-        strncmp (buffer + *p, "sh", _sh) == 0 ||
-        strncmp (buffer + *p, "ch", _ch) == 0 ||
-        strncmp (buffer + *p, "th", _th) == 0 ||
-        strncmp (buffer + *p, "cth", _cth) == 0 ||
-        strncmp (buffer + *p, "log", _log) == 0)
+    if (tokens[*p]->type == TRIG_OPERATION)
         {
-
-            if (strncmp (buffer + *p, "sin", _sin) == 0)
+            int operation = tokens[*p]->value;
+            (*p)++;
+            Node *val = getPow(tokens, p);
+            return nodeCtor(TRIG_OPERATION, operation, val, NULL);
+        } else if (tokens[*p]->type == OPERATION && tokens[*p]->value == LOG) {
+            (*p)++;
+            Node *val = getNumbers (tokens, p);
+            if (tokens[*p]->type == OPERATION && tokens[*p]->value == SKOBKA)
             {
-                *p += _sin;
-                Node *val = getPow(buffer, p);
-                return SIN_ (val);
-            } else if (strncmp (buffer + *p, "cos", _cos) == 0) {
-                *p += _cos;
-                Node *val = getPow(buffer, p);
-                return COS_ (val);
-            } else if (strncmp (buffer + *p, "tg", _tg) == 0) {
-                *p += _tg;
-                Node *val = getPow(buffer, p);
-                return TG_ (val);
-            } else if (strncmp (buffer + *p, "ctg", _ctg) == 0) {
-                *p += _ctg;
-                Node *val = getPow(buffer, p);
-                return CTG_ (val);
-            } else if (strncmp (buffer + *p, "arcsin", _arcsin) == 0) {
-                *p += _arcsin;
-                Node *val = getPow(buffer, p);
-                return ARCSIN_ (val);
-            } else if (strncmp (buffer + *p, "arccos", _arccos) == 0) {
-                *p += _arccos;
-                Node *val = getPow(buffer, p);
-                return ARCCOS_ (val);
-            } else if (strncmp (buffer + *p, "arctg", _arctg) == 0) {
-                *p += _arctg;
-                Node *val = getPow(buffer, p);
-                return ARCTG_ (val);
-            } else if (strncmp (buffer + *p, "arcctg", _arcctg) == 0) {
-                *p += _arctg;
-                Node *val = getPow(buffer, p);
-                return ARCCTG_ (val);
-            } else if (strncmp (buffer + *p, "sh", _sh) == 0) {
-                *p += _sh;
-                Node *val = getPow(buffer, p);
-                return SH_ (val);
-            } else if (strncmp (buffer + *p, "ch", _ch) == 0) {
-                *p += _ch;
-                Node *val = getPow(buffer, p);
-                return CH_ (val);
-            } else if (strncmp (buffer + *p, "th", _th) == 0) {
-                *p += _th;
-                Node *val = getPow(buffer, p);
-                return TH_ (val);
-            } else if (strncmp (buffer + *p, "cth", _cth) == 0) {
-                *p += _cth;
-                Node *val = getPow(buffer, p);
-                return CTH_ (val);
-            } else if (strncmp (buffer + *p, "log", _log) == 0)
-            {
-                *p += _log;
-                Node *val = getNumbers (buffer, p);
-                if (buffer[*p] == '(')
+                (*p)++;
+                Node *val2 = getSum (tokens, p);
+                if (tokens[*p]->type == OPERATION && tokens[*p]->value == SKOBKA_ZAKR)
                 {
                     (*p)++;
-                    Node *val2 = getSum (buffer, p);
-                    if (buffer[*p] == ')')
-                    {
-                        (*p)++;
-                        return LOG_(val,val2);
-                    }
-                    SyntaxError (buffer, p);
-                } else
-                {
-                    SyntaxError (buffer, p);
+                    return LOG_(val,val2);
                 }
+                SyntaxError (tokens, p);
+                return NULL;
+            } else {
+                SyntaxError (tokens, p);
+                return NULL;
             }
-            
-            return NULL;
         }
-    else return getPow (buffer, p);
+    else return getPow (tokens, p);
 }
 
-Node *getPow (char *buffer, int *p)
+Node *getPow (Token *tokens[], int *p)
 {
-    Node *val = getBranches (buffer, p);
+    Node *val = getBranches (tokens, p);
     Node *val2 = NULL;
 
-    if (buffer[*p] == '^' )
+    if (tokens[*p]->type == OPERATION && tokens[*p]->value == POW)
     {
         (*p)++;
-        val2 = getBranches (buffer, p);
+        val2 = getBranches (tokens, p);
     } else {
         return val;
     }
@@ -211,27 +124,241 @@ Node *getPow (char *buffer, int *p)
     return POW_(val, val2);
 }
 
-Node *getVar (char *buffer, int *p)
+Node *getVar (Token *tokens[], int *p)
 {
-    if (buffer[*p] == 'x')
+    if (tokens[*p]->type == VARIABLE && tokens[*p]->value == X)
     {
         (*p)++;
         return X_;
-    } else if (buffer[*p] == 'e')
+    } else if (tokens[*p]->type == CONST && tokens[*p]->value == E)
     {
         (*p)++;
         return E_;
-    } else if (strncmp (buffer + *p, "pi", _pi) == 0)
+    } else if (tokens[*p]->type == CONST && tokens[*p]->value == PI)
     {
-        (*p) += _pi;
+        (*p)++;
         return PI_;
     }
-    else return getNumbers (buffer, p);
+    else return getNumbers (tokens, p);
 }
 
-Node *SyntaxError (char *buffer, int *p)
+Node *SyntaxError (Token *tokens[], int *p)
 {
-    printf ("%c\n%d\n", buffer[*p], *p);
-    printf ("Syntax error\n");
+    printf ("Syntax error ");
+    printf ("%d %f\n", tokens[*p]->type, tokens[*p]->value);
     exit (1);
+}
+
+Node * makeTreeFromFile (const char* fileName)
+{
+    FILE *file = fopen (fileName, "r");
+    if (file == NULL)
+    {
+        return 0;
+    }
+
+    fseek (file, 0, SEEK_END);
+    int size = ftell (file);
+    fseek (file, 0, SEEK_SET);
+
+    char *buffer = (char *)calloc (size, sizeof(char));
+    if (buffer == NULL)
+    {
+        return 0;
+    }
+
+    fread (buffer, sizeof(char), size, file);
+    fclose (file);
+
+    Token **tokens = (Token **)calloc (size, sizeof(Token*));
+    if (tokens == NULL)
+    {
+        return 0;
+    }
+    for (int y = 0; y < size; y++)
+    {
+        tokens[y] = (Token*) calloc(1, sizeof(Token));
+    }
+
+    int i = 0;
+    int n = 0;
+    while (*(buffer + i) != '$')
+    {
+        if (*(buffer + i) == ' ')
+        {
+            i++;
+        } else if (isdigit (*(buffer + i)) != 0)
+        {
+            makeNumberToken (buffer, &i, &n, tokens);
+        } else if (isalpha (*(buffer + i)) != 0)
+        {
+            makeFunctionToken (buffer, &i, &n, tokens);
+        } else {
+            makeOPerationToken (buffer, &i, &n, tokens);
+        }
+    }
+    tokens[n]->type = EMPTY;
+    n++;
+
+    /*for (int u = 0; u < n; u++)
+    {
+        printf ("%d %f\n", tokens[u]->type, tokens[u]->value);
+    }*/
+
+    Node* node = readFunc(tokens);
+
+    dump (WIDE, node, node);
+
+    return node;
+}
+
+bool makeNumberToken (char *buffer, int *i, int *n, Token *tokens[])
+{
+    double value = 0;
+    while (isdigit (*(buffer + *i)) != 0)
+    {
+        value = value*10 + *(buffer + *i) - '0';
+        (*i)++;
+    }
+
+    if (*(buffer + *i) == ',')
+    {
+        (*i)++;
+        if (isdigit (*(buffer + *i)) == 0)
+        {
+            SyntaxError (tokens, n);
+            return false;
+        }
+
+        int oldI = *i;
+        while (isdigit (*(buffer + *i)) != 0)
+        {
+            value = value*10 + *(buffer + *i) - '0';
+            (*i)++;
+        }
+        value = value / (pow(10, *i - oldI));
+    }
+
+    tokens[*n]->type = NUMBER;
+    tokens[*n]->value = value;
+    (*n)++;
+
+    return true;
+}
+
+bool makeFunctionToken (char *buffer, int *i, int *n, Token *tokens[])
+{
+   const char* func[][3] = {{"sin", "1", "3"},
+                            {"cos", "2", "3"},
+                            {"tg", "3", "2"},
+                            {"ctg", "4", "3"},
+                            {"arcsin", "5", "6"},
+                            {"arccos", "6", "6"},
+                            {"arctg", "7", "5"},
+                            {"arcctg", "8", "6"},
+                            {"sh", "9", "2"},
+                            {"ch", "10", "2"},
+                            {"th", "11", "2"},
+                            {"cth", "12", "3"}};
+
+    
+    for (int o = 1; o <= sizeof(func)/sizeof(const char *[3]); o++)
+    {
+        if (strncmp(buffer + *i, func[o-1][0], *(func[o-1][2]) - '0') == 0)
+        {
+            tokens[*n]->type = TRIG_OPERATION;
+            tokens[*n]->value = o;
+            (*n)++;
+            (*i) += *(func[o-1][2]) - '0';
+            return true;
+        }
+    }
+
+    if (strncmp(buffer + *i, "log", 3) == 0)
+        {
+            tokens[*n]->type = OPERATION;
+            tokens[*n]->value = 8;
+            (*n)++;
+            (*i) += 3;
+            return true;
+        }
+
+    makeVarToken (buffer, i, n, tokens);
+    
+    return false;
+}
+
+bool makeVarToken (char *buffer, int *i, int *n, Token *tokens[])
+{
+    if (strchr(buffer + *i, 'x') != 0)
+    {
+        tokens[*n]->type = VARIABLE;
+        tokens[*n]->value = 0;
+        (*n)++;
+        (*i)++;
+        return true;
+    } else if (strchr(buffer + *i, 'e') != 0)
+    {
+        tokens[*n]->type = CONST;
+        tokens[*n]->value = E;
+        (*n)++;
+        (*i)++;
+        return true;
+    } else if (strncmp(buffer + *i, "pi", 2) == 0)
+    {
+        tokens[*n]->type = CONST;
+        tokens[*n]->value = PI;
+        (*n)++;
+        (*i) += 2;
+        return true;
+    }
+
+    return false;
+}
+
+bool makeOPerationToken (char *buffer, int *i, int *n, Token *tokens[])
+{
+    const char operation [] =  {'+',
+                                '-',
+                                '*',
+                                '/',
+                                '^'};
+
+    
+    for (int l = 1; l <= sizeof(operation)/sizeof(const char); l++)
+    {
+        if (*(buffer + *i) == operation[l - 1])
+        {
+            tokens[*n]->type = OPERATION;
+            tokens[*n]->value = l;
+            (*n)++;
+            (*i)++;
+            return true;
+        }
+    }
+
+    return tvariUlybchatye (buffer, i, n, tokens);
+}
+
+bool tvariUlybchatye (char *buffer, int *i, int *n, Token *tokens[])
+{
+    if (strchr(buffer + *i, '(') != 0)
+        {
+            tokens[*n]->type = OPERATION;
+            tokens[*n]->value = SKOBKA;
+            (*n)++;
+            (*i)++;
+            return true;
+        }
+
+    if (strchr(buffer + *i, ')') != 0)
+        {
+            tokens[*n]->type = OPERATION;
+            tokens[*n]->value = SKOBKA_ZAKR;
+            (*n)++;
+            (*i)++;
+            return true;
+        }
+
+    return false;
 }

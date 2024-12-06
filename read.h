@@ -5,15 +5,29 @@
 #include "tree.h"
 #include "dump.h"
 #include <string.h>
+#include <ctype.h>
 
-Node *readFunc (const char *fileName);
-Node *getBranches (char *buffer, int *p);
-Node *getNumbers (char *buffer, int *p);
-Node *getSum (char *buffer, int *p);
-Node *getMul (char *buffer, int *p);
-Node *getTrig (char *buffer, int *p);
-Node *getPow (char *buffer, int *p);
-Node *SyntaxError (char *buffer, int *p);
-Node *getVar (char *buffer, int *p);
+struct Token
+{
+    NODE_TYPE type = EMPTY;
+    double value   = 0;
+};
+
+
+Node *readFunc (Token *tokens[]);
+Node *getBranches (Token *tokens[], int *p);
+Node *getNumbers (Token *tokens[], int *p);
+Node *getSum (Token *tokens[], int *p);
+Node *getMul (Token *tokens[], int *p);
+Node *getTrig (Token *tokens[], int *p);
+Node *getPow (Token *tokens[], int *p);
+Node *SyntaxError (Token *tokens[], int *p);
+Node *getVar (Token *tokens[], int *p);
+Node *makeTreeFromFile (const char* fileName);
+bool makeNumberToken (char *buffer, int *i, int *n, Token *tokens[]);
+bool makeOPerationToken (char *buffer, int *i, int *n, Token *tokens[]);
+bool makeVarToken (char *buffer, int *i, int *n, Token *tokens[]);
+bool makeFunctionToken (char *buffer, int *i, int *n, Token *tokens[]);
+bool tvariUlybchatye (char *buffer, int *i, int *n, Token *tokens[]);
 
 #endif

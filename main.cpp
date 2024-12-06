@@ -5,7 +5,7 @@
 
 int main ()
 {
-    Node *node = readFunc ("func.txt");
+    Node *node = makeTreeFromFile ("func.txt");
     makeTexFile ("tex.tex", node);
     nodeDtor (node);
 

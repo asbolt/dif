@@ -121,22 +121,26 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
     {
         if (node->type == NUMBER)
         {
-            fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  %d|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,   node->value, rang);
+            fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  %d|{NULL | NULL}}\", rang = %d]\n", node, 
+                     node, node->type, node->value, node->value, rang);
         }
 
         if (node->type == CONST)
         {
             if (node->value == E)
-                fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  e|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  e|{%p | %p}}\", rang = %d]\n", node, 
+                         node, node->type, node->value,node->left, node->right, rang);
             else
-                fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  pi|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  pi|{%p | %p}}\", rang = %d]\n", node, 
+                         node, node->type, node->value,node->left, node->right, rang);
         }
 
         if (node->type == VARIABLE)
         {
             switch (node->value)
             {
-            case X: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  x|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+            case X: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  x|{%p | %p}}\", rang = %d]\n", node, 
+                             node, node->type, node->value,node->left, node->right, rang);
                     break;
             
             default: break;
@@ -147,21 +151,29 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
         {
             switch (node->value)
             {
-                case ADD:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  +|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case ADD:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  +|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case SUB:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  -|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case SUB:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  -|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case MUL:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  *|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case MUL:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  *|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case DIV:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  :|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case DIV:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  :|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case POW:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  ^|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case POW:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  ^|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case EXP_FUN: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  ^|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case EXP_FUN: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  ^|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case EXP:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  ^|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case EXP:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  ^|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
-                case LOG:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  log|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case LOG:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d |  log|{%p | %p}}\", rang = %d]\n", node, 
+                                       node, node->type, node->value,node->left, node->right, rang);
                               break;
 
                 default: break;
@@ -172,29 +184,41 @@ bool treeDumpMakeNodeLabels (Node *node, int rang, FILE *dotFile, int mode)
         {
             switch (node->value)
             {
-                case SIN:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | sin|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case SIN:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | sin|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case COS:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | cos|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case COS:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | cos|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case TG:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | tg|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case TG:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | tg|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case CTG:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | ctg|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case CTG:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | ctg|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case ARCSIN: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arcsin|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case ARCSIN: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arcsin|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case ARCCOS: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arccos|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case ARCCOS: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arccos|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case ARCTG:  fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arctg|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case ARCTG:  fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arctg|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case ARCCTG: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arcctg|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case ARCCTG: fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | arcctg|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case SH:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | sh|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case SH:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | sh|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case CH:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | ch|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case CH:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | ch|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case TH:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | th|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case TH:     fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | th|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
-                case CTH:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | cth|{%p | %p}}\", rang = %d]\n", node, node, node->type, node->value,node->left, node->right, rang);
+                case CTH:    fprintf (dotFile, "node%p [shape=record, label = \" {%p | %d | %d | cth|{%p | %p}}\", rang = %d]\n", node, 
+                                      node, node->type, node->value,node->left, node->right, rang);
                              break;
 
                 default: break;

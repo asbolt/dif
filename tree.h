@@ -7,25 +7,6 @@
 
 #define VALUES_FOR_ERROR __LINE__, __FUNCTION__, __FILE__
 
-enum SIZE_OPERATIONS
-{
-    _sin = 3,
-    _cos = 3,
-    _tg = 2,
-    _ctg = 3,
-    _arcsin = 6,
-    _arccos = 6,
-    _arctg = 5,
-    _arcctg = 6,
-    _sh = 2,
-    _ch = 2,
-    _th = 2,
-    _cth = 3,
-    _log = 3,
-    _pi = 2,
-    _e = 1
-};
-
 enum NODE_TYPE
 {
     NUMBER         = 1,
@@ -38,14 +19,16 @@ enum NODE_TYPE
 
 enum NODE_OPERATIONS
 {
-    ADD     = 1,
-    SUB     = 2,
-    MUL     = 3,
-    DIV     = 4,
-    POW     = 5,
-    EXP_FUN = 6,
-    EXP     = 7,
-    LOG     = 8,
+    ADD         = 1,
+    SUB         = 2,
+    MUL         = 3,
+    DIV         = 4,
+    POW         = 5,
+    EXP_FUN     = 6,
+    EXP         = 7,
+    LOG         = 8,
+    SKOBKA      = 9,
+    SKOBKA_ZAKR = 10
 };
 
 enum NODE_TRIG_OPERATIONS

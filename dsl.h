@@ -30,7 +30,7 @@
 #define E_ nodeCtor (CONST, E, NULL, NULL)
 #define PI_ nodeCtor (CONST, PI, NULL, NULL)
 
-#define DIFF(branch) differentiate (node->branch, root, file)
-#define COPY(branch) copySubtree (node->branch)
+#define DIFF_(branch) differentiate (node->branch, root, file, stuki, druki, stukiIndex)
+#define COPY_SUB_TREE_(branch) copySubtree (node->branch)
 
 #endif
