@@ -1,5 +1,5 @@
-#include "optimization.h"
-#include "diff.h"
+#include "../h_files/optimization.h"
+#include "../h_files/diff.h"
 
 Node *nodeOptimization (Node *node)
 {

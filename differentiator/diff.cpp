@@ -1,5 +1,5 @@
-#include "diff.h"
-#include "dump.h"
+#include "../h_files/diff.h"
+#include "../h_files/dump.h"
 
 Node *differentiateAndOptimize(Node *root, FILE *file)
 {

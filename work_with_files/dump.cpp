@@ -1,4 +1,4 @@
-#include "dump.h"
+#include "../h_files/dump.h"
 
 bool dump (int mode, Node *node, Node *diffNode)
 {

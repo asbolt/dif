@@ -1,4 +1,4 @@
-#include "tree.h"
+#include "../h_files/tree.h"
 
 Node* nodeCtor (NODE_TYPE nodeType, int value, Node *left, Node *right)
 {

@@ -1,7 +1,7 @@
-#include "tree.h"
-#include "diff.h"
-#include "dump.h"
-#include "read.h"
+#include "h_files/tree.h"
+#include "h_files/diff.h"
+#include "h_files/dump.h"
+#include "h_files/read.h"
 
 int main ()
 {

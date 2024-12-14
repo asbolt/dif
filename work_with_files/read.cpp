@@ -1,4 +1,4 @@
-#include "read.h"
+#include "../h_files/read.h"
 
 Node *readFunc (Token *tokens[])
 {
