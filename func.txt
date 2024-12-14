@@ -1,1 +1,0 @@
-(sin(x)*(e^(x))+x)/((cos(x)^7)+arctg(x))$
